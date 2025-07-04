@@ -157,4 +157,47 @@ button:hover, button:focus {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-/* Fidget and Soothing Sounds remain unchanged, but benefit from new background and button styles */
+/* --- Immersive Features & Enhancements --- */
+/* Animated floating shapes for extra calm */
+.floating-shape {
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.18;
+  animation: floatShape 18s ease-in-out infinite alternate;
+}
+@keyframes floatShape {
+  0% { transform: translateY(0) scale(1) rotate(0deg); }
+  100% { transform: translateY(-60px) scale(1.12) rotate(12deg); }
+}
+/* Gentle pulse for breathing exercise overlay */
+.breathing-overlay {
+  background: rgba(168, 237, 234, 0.22);
+  animation: pulseBg 3.5s infinite alternate;
+}
+@keyframes pulseBg {
+  0% { background: rgba(168, 237, 234, 0.22); }
+  100% { background: rgba(168, 237, 234, 0.32); }
+}
+/* Soft glow for active affirmations */
+.affirmation-active {
+  box-shadow: 0 0 18px 4px #b8c0ff44, 0 2px 12px #5e60ce22;
+  background: linear-gradient(90deg, #e0c3fc 60%, #a8edea 100%);
+  color: #5e60ce;
+  transition: box-shadow 0.4s, background 0.4s, color 0.4s;
+}
+/* Animated border for gratitude journal popup */
+.gratitude-popup {
+  border: 2.5px solid;
+  border-image: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%) 1;
+  animation: borderPulse 2.5s infinite alternate;
+}
+@keyframes borderPulse {
+  0% { border-width: 2.5px; }
+  100% { border-width: 4px; }
+}
+/* Accessibility: focus ring for all interactive elements */
+button:focus, .tab:focus, input:focus {
+  outline: 2.5px solid #5e60ce;
+  outline-offset: 2px;
+}

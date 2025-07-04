@@ -5,13 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign Up - Mindcare</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #232946 0%, #121629 100%) !important;
+      color: #e0e6f7 !important;
+    }
+    .container {
+      background: #232946 !important;
+      border-radius: 18px !important;
+      box-shadow: 0 4px 32px #12162944 !important;
+      padding-bottom: 24px;
+    }
+    .tabs {
+      background: #232946 !important;
+      border-radius: 8px !important;
+    }
+    .tab, .tab.active {
+      color: #a8edea !important;
+      background: transparent !important;
+    }
+    .tab.active {
+      color: #43cea2 !important;
+      font-weight: bold;
+      border-bottom: 2px solid #43cea2 !important;
+    }
+    h1, h2, b {
+      color: #a8edea !important;
+    }
+    /* Card backgrounds */
+    [style*="background:#f7f7ff"], [style*="background:#e0f7fa"], [style*="background:#fff"], [style*="background:#fff3cd"] {
+      background: #232946 !important;
+      color: #e0e6f7 !important;
+      border: 1px solid #23294622 !important;
+    }
+    /* Floating shapes */
+    .floating-shape {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+      z-index: 1;
+      opacity: 0.18;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    /* Affirmation glow */
+    .affirmation-active {
+      animation: glow-dark 1.5s ease-in-out infinite;
+    }
+    @keyframes glow-dark {
+      0% { text-shadow: 0 0 8px #43cea2, 0 0 16px #232946, 0 0 24px #232946; }
+      100% { text-shadow: 0 0 16px #a8edea, 0 0 32px #43cea2, 0 0 48px #232946; }
+    }
+    /* Inputs, buttons */
+    input, textarea, select {
+      background: #181b2a !important;
+      color: #e0e6f7 !important;
+      border: 1px solid #a8edea !important;
+    }
+    input:focus, textarea:focus, select:focus {
+      border: 2px solid #43cea2 !important;
+      outline: none !important;
+      background: #232946 !important;
+    }
+    button {
+      background: #43cea2 !important;
+      color: #232946 !important;
+      border: none !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
+    }
+    button:hover {
+      background: #a8edea !important;
+      color: #232946 !important;
+    }
+    /* Floating shapes (dark) */
+    .floating-shape {
+      opacity: 0.22 !important;
+      filter: brightness(0.7) saturate(1.2) !important;
+    }
+  </style>
 </head>
 <body>
+  <!-- Immersive Floating Shapes -->
+  <div class="floating-shape" style="top:12%;left:8%;width:60px;height:60px;background:radial-gradient(circle,#fed6e3 60%,#fff0 100%);"></div>
+  <div class="floating-shape" style="top:70%;left:80%;width:44px;height:44px;background:radial-gradient(circle,#a8edea 60%,#fff0 100%);"></div>
+  <div class="floating-shape" style="top:40%;left:60%;width:36px;height:36px;background:radial-gradient(circle,#b8c0ff 60%,#fff0 100%);"></div>
   <div class="container">
     <h1>Mindcare</h1>
     <div class="tabs">
       <div class="tab" id="loginTab" onclick="window.location.href='login.html'">Login</div>
       <div class="tab active" id="signupTab" onclick="switchTab('signup')">Sign Up</div>
+      <div class="tab" onclick="window.location.href='index.html'">Home</div>
+      <div class="tab" onclick="window.location.href='soothing.html'">Soothing Sounds</div>
+      <div class="tab" onclick="window.location.href='puzzles.html'">Puzzles</div>
     </div>
     <form id="signupForm">
       <div class="input-group">
@@ -24,12 +113,60 @@
       </div>
       <button type="submit">Sign Up</button>
     </form>
+    <!-- Interactive: Signup Motivation -->
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#43cea2; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
+      <b>What brings you to Mindcare?</b>
+      <input id="signupReasonInput" type="text" placeholder="Type your reason..." style="margin:0 8px 0 8px; border-radius:6px; padding:6px; border:1px solid #b8c0ff;" />
+      <button id="signupReasonSaveBtn" style="background:#43cea2; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Save</button>
+      <span id="signupReasonSavedMsg" style="margin-left:12px;color:#5e60ce;"></span>
+    </div>
   </div>
   <script src="script.js"></script>
   <script>
     document.getElementById('signupForm').onsubmit = function(e) {
       e.preventDefault();
       showMainApp();
+    };
+    // Affirmations
+    const affirmations = [
+      "You are enough, just as you are.",
+      "You are worthy of love and care.",
+      "Your feelings matter.",
+      "You are not a burden.",
+      "You are allowed to take up space.",
+      "You are resilient, even on hard days.",
+      "You are not alone in this.",
+      "You are doing your best, and that's enough.",
+      "You are allowed to rest.",
+      "You are brave for facing today.",
+      "You are loved, even when you can't feel it.",
+      "You are important and your story matters.",
+      "You are allowed to feel joy and peace.",
+      "You are strong, even when you feel weak.",
+      "You are healing, one step at a time.",
+      "You are safe in this moment.",
+      "You are valued for who you are."
+    ];
+    // --- Affirmation Glow ---
+    const affirmationText = document.getElementById('affirmationText');
+    const newAffirmationBtn = document.getElementById('newAffirmationBtn');
+    function showAffirmation() {
+      const idx = Math.floor(Math.random() * affirmations.length);
+      affirmationText.innerText = affirmations[idx];
+      affirmationText.classList.add('affirmation-active');
+      setTimeout(()=>affirmationText.classList.remove('affirmation-active'), 1800);
+    }
+    newAffirmationBtn.onclick = showAffirmation;
+    showAffirmation();
+    // Interactive: Signup Motivation
+    document.getElementById('signupReasonSaveBtn').onclick = function() {
+      const reason = document.getElementById('signupReasonInput').value.trim();
+      if(reason) {
+        localStorage.setItem('mindcareSignupReason', reason);
+        document.getElementById('signupReasonSavedMsg').innerText = 'Saved!';
+      } else {
+        document.getElementById('signupReasonSavedMsg').innerText = '';
+      }
     };
   </script>
 </body>
