@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soothing Sounds - Mindcare</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Soothing Sounds</h1>
+    <div class="tabs">
+      <a class="tab" href="index.html">Home</a>
+      <a class="tab active" href="#">Soothing Sounds</a>
+      <a class="tab" href="fidget.html">Fidget & Puzzles</a>
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
+      <b>Welcome to your calm space.</b> Let these sounds help you relax, focus, or just take a break. You are safe and supported here.
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#4a4a4a; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
+      <b>Affirmation of the Moment:</b>
+      <span id="affirmationText" style="display:block;margin:8px 0 0 0;"></span>
+      <button id="newAffirmationBtn" style="margin-top:8px; background:#5e60ce; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Show Another</button>
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
+      <b>Need a Breather?</b>
+      <button id="breathBtn" style="margin-left:8px; background:#43cea2; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Start Breathing Exercise</button>
+    </div>
+    <div id="breathModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(168,237,234,0.85);z-index:1000;align-items:center;justify-content:center;">
+      <div style="background:#fff;border-radius:16px;padding:32px 24px;box-shadow:0 4px 24px rgba(94,96,206,0.13);text-align:center;max-width:340px;margin:auto;">
+        <h2 style="color:#5e60ce;">Breathing Exercise</h2>
+        <div id="breathGuide" style="font-size:1.3em;margin:18px 0;">Breathe in...</div>
+        <button onclick="closeBreathModal()" style="background:#5e60ce;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1em;cursor:pointer;">Close</button>
+      </div>
+    </div>
+    <div style="margin:24px 0;">
+      <label for="soundSelect"><b>Select a Sound:</b></label>
+      <select id="soundSelect">
+        <option value="stream">Gentle Stream</option>
+        <option value="rain">Rain</option>
+        <option value="forest">Forest Birds</option>
+        <option value="ocean">Ocean Waves</option>
+        <option value="night">Night Crickets</option>
+        <option value="white">White Noise</option>
+        <option value="music">Gentle Piano</option>
+      </select>
+    </div>
+    <audio id="audioPlayer" controls loop style="width:100%">
+      <source id="audioSource" src="https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b1b6b7.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <div id="soundLabel" style="font-size:0.9em;color:#555;">(Sample: Gentle Stream)</div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    // Affirmations
+    const affirmations = [
+      "You are enough, just as you are.",
+      "You are worthy of love and care.",
+      "Your feelings matter.",
+      "You are not a burden.",
+      "You are allowed to take up space.",
+      "You are resilient, even on hard days.",
+      "You are not alone in this.",
+      "You are doing your best, and that's enough.",
+      "You are allowed to rest.",
+      "You are brave for facing today.",
+      "You are loved, even when you can't feel it.",
+      "You are important and your story matters.",
+      "You are allowed to feel joy and peace.",
+      "You are strong, even when you feel weak.",
+      "You are healing, one step at a time.",
+      "You are safe in this moment.",
+      "You are valued for who you are."
+    ];
+    function showAffirmation() {
+      const idx = Math.floor(Math.random() * affirmations.length);
+      document.getElementById('affirmationText').innerText = affirmations[idx];
+    }
+    document.getElementById('newAffirmationBtn').onclick = showAffirmation;
+    showAffirmation();
+    // Breathing Exercise
+    const breathBtn = document.getElementById('breathBtn');
+    const breathModal = document.getElementById('breathModal');
+    const breathGuide = document.getElementById('breathGuide');
+    let breathInterval = null;
+    breathBtn.onclick = function() {
+      breathModal.style.display = 'flex';
+      let steps = ["Breathe in...", "Hold...", "Breathe out...", "Hold..."];
+      let idx = 0;
+      breathGuide.innerText = steps[idx];
+      breathInterval = setInterval(() => {
+        idx = (idx + 1) % steps.length;
+        breathGuide.innerText = steps[idx];
+      }, 3500);
+    };
+    window.closeBreathModal = function() {
+      breathModal.style.display = 'none';
+      clearInterval(breathInterval);
+    };
+    // Soothing Sounds
+    const soundMap = {
+      stream: {src: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b1b6b7.mp3', label: 'Gentle Stream'},
+      rain: {src: 'https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7b.mp3', label: 'Rain'},
+      forest: {src: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b1b6b8.mp3', label: 'Forest Birds'},
+      ocean: {src: 'https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7b.mp3', label: 'Ocean Waves'},
+      night: {src: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b1b6b9.mp3', label: 'Night Crickets'},
+      white: {src: 'https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7b.mp3', label: 'White Noise'},
+      music: {src: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b1b6b6.mp3', label: 'Gentle Piano'}
+    };
+    document.getElementById('soundSelect').onchange = function() {
+      const val = this.value;
+      document.getElementById('audioSource').src = soundMap[val].src;
+      document.getElementById('audioPlayer').load();
+      document.getElementById('soundLabel').innerText = '(Sample: ' + soundMap[val].label + ')';
+    };
+  </script>
+</body>
+</html>

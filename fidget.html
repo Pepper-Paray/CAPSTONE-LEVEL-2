@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fidget & Puzzles - Mindcare</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Fidget & Puzzles</h1>
+    <div class="tabs">
+      <a class="tab" href="index.html">Home</a>
+      <a class="tab" href="soothing.html">Soothing Sounds</a>
+      <a class="tab active" href="#">Fidget & Puzzles</a>
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
+      <b>Welcome to your play space.</b> Fidgets and puzzles can help you focus, relax, or just have fun. You are doing great!
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#4a4a4a; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
+      <b>Affirmation of the Moment:</b>
+      <span id="affirmationText" style="display:block;margin:8px 0 0 0;"></span>
+      <button id="newAffirmationBtn" style="margin-top:8px; background:#5e60ce; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Show Another</button>
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
+      <b>Need a Breather?</b>
+      <button id="breathBtn" style="margin-left:8px; background:#43cea2; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Start Breathing Exercise</button>
+    </div>
+    <div id="breathModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(168,237,234,0.85);z-index:1000;align-items:center;justify-content:center;">
+      <div style="background:#fff;border-radius:16px;padding:32px 24px;box-shadow:0 4px 24px rgba(94,96,206,0.13);text-align:center;max-width:340px;margin:auto;">
+        <h2 style="color:#5e60ce;">Breathing Exercise</h2>
+        <div id="breathGuide" style="font-size:1.3em;margin:18px 0;">Breathe in...</div>
+        <button onclick="closeBreathModal()" style="background:#5e60ce;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1em;cursor:pointer;">Close</button>
+      </div>
+    </div>
+    <div style="margin-bottom:24px;">
+      <label for="fidgetSelect"><b>Select a Fidget:</b></label>
+      <select id="fidgetSelect">
+        <option value="spinner">Spinner</option>
+        <option value="bounce">Bouncing Ball</option>
+        <option value="pulse">Pulsing Dot</option>
+      </select>
+      <div class="fidget" id="fidgetArea">
+        <div class="fidget-shape" id="fidgetShape"></div>
+      </div>
+    </div>
+    <div style="margin-top:32px;">
+      <label for="puzzleSelect"><b>Select a Puzzle:</b></label>
+      <select id="puzzleSelect">
+        <option value="none">-- Choose --</option>
+        <option value="riddle">Riddle</option>
+        <option value="math">Math Puzzle</option>
+        <option value="wordsearch">Word Search</option>
+        <option value="spot">Spot the Difference</option>
+      </select>
+      <div id="puzzleArea" style="margin-top:16px;"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    // Affirmations
+    const affirmations = [
+      "You are enough, just as you are.",
+      "You are worthy of love and care.",
+      "Your feelings matter.",
+      "You are not a burden.",
+      "You are allowed to take up space.",
+      "You are resilient, even on hard days.",
+      "You are not alone in this.",
+      "You are doing your best, and that's enough.",
+      "You are allowed to rest.",
+      "You are brave for facing today.",
+      "You are loved, even when you can't feel it.",
+      "You are important and your story matters.",
+      "You are allowed to feel joy and peace.",
+      "You are strong, even when you feel weak.",
+      "You are healing, one step at a time.",
+      "You are safe in this moment.",
+      "You are valued for who you are."
+    ];
+    function showAffirmation() {
+      const idx = Math.floor(Math.random() * affirmations.length);
+      document.getElementById('affirmationText').innerText = affirmations[idx];
+    }
+    document.getElementById('newAffirmationBtn').onclick = showAffirmation;
+    showAffirmation();
+    // Breathing Exercise
+    const breathBtn = document.getElementById('breathBtn');
+    const breathModal = document.getElementById('breathModal');
+    const breathGuide = document.getElementById('breathGuide');
+    let breathInterval = null;
+    breathBtn.onclick = function() {
+      breathModal.style.display = 'flex';
+      let steps = ["Breathe in...", "Hold...", "Breathe out...", "Hold..."];
+      let idx = 0;
+      breathGuide.innerText = steps[idx];
+      breathInterval = setInterval(() => {
+        idx = (idx + 1) % steps.length;
+        breathGuide.innerText = steps[idx];
+      }, 3500);
+    };
+    window.closeBreathModal = function() {
+      breathModal.style.display = 'none';
+      clearInterval(breathInterval);
+    };
+    // Fidget Animations
+    function renderFidget(type) {
+      const area = document.getElementById('fidgetArea');
+      if(type === 'spinner') {
+        area.innerHTML = '<div class="fidget-shape" id="fidgetShape"></div>';
+        setupFidget();
+      } else if(type === 'bounce') {
+        area.innerHTML = '<div style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;"><div id="bouncingBall" style="width:40px;height:40px;border-radius:50%;background:#5e60ce;animation:bounce 1s infinite alternate;"></div></div>';
+      } else if(type === 'pulse') {
+        area.innerHTML = '<div style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;"><div id="pulseDot" style="width:32px;height:32px;border-radius:50%;background:#43cea2;animation:pulse 1.2s infinite;"></div></div>';
+      }
+    }
+    document.getElementById('fidgetSelect').onchange = function() {
+      renderFidget(this.value);
+    };
+    renderFidget('spinner');
+    // Puzzles
+    document.getElementById('puzzleSelect').onchange = function() {
+      const area = document.getElementById('puzzleArea');
+      const val = this.value;
+      if(val === 'riddle') {
+        area.innerHTML = '<b>What has keys but can’t open locks?</b><br><input id="riddleAns" type="text" placeholder="Your answer..." /><button onclick="checkRiddle()">Check</button><div id="riddleResult"></div>';
+      } else if(val === 'math') {
+        area.innerHTML = '<b>What is 7 x 8?</b><br><input id="mathAns" type="number" /><button onclick="checkMath()">Check</button><div id="mathResult"></div>';
+      } else if(val === 'wordsearch') {
+        area.innerHTML = `<b>Find the word: <span style='color:#5e60ce'>MINDFUL</span></b><br><pre style='font-family:monospace;font-size:1.1em;background:#f1f1fb;padding:8px;border-radius:6px;display:inline-block;'>M Q W F U L
+I N D F U L
+N I M D U L
+D F U L M N
+F U L M I N
+U L M I N D</pre><br><input id='wsAns' type='text' placeholder='Type the word...' /><button onclick='checkWordSearch()'>Check</button><div id='wsResult'></div>`;
+      } else if(val === 'spot') {
+        area.innerHTML = `<b>Spot the Difference</b><br><img src='https://cdn.pixabay.com/photo/2017/01/06/19/15/soap-bubble-1958650_1280.jpg' alt='Spot 1' style='width:120px;border:2px solid #5e60ce;margin:4px;'><img src='https://cdn.pixabay.com/photo/2017/01/06/19/15/soap-bubble-1958650_1280.jpg' alt='Spot 2' style='width:120px;border:2px solid #5e60ce;margin:4px;filter:brightness(0.95) contrast(1.1);'><br><span style='font-size:0.95em;color:#555;'>Can you spot the difference? (Hint: Try looking at the brightness and contrast!)</span>`;
+      } else {
+        area.innerHTML = '';
+      }
+    };
+    window.checkRiddle = function() {
+      const ans = document.getElementById('riddleAns').value.trim().toLowerCase();
+      document.getElementById('riddleResult').innerHTML = (ans.includes('piano') ? '<span style="color:green">Correct!</span>' : '<span style="color:red">Try again!</span>');
+    };
+    window.checkMath = function() {
+      const ans = document.getElementById('mathAns').value.trim();
+      document.getElementById('mathResult').innerHTML = (ans === '56' ? '<span style="color:green">Correct!</span>' : '<span style="color:red">Try again!</span>');
+    };
+    window.checkWordSearch = function() {
+      const ans = document.getElementById('wsAns').value.trim().toUpperCase();
+      document.getElementById('wsResult').innerHTML = (ans === 'MINDFUL' ? '<span style="color:green">Correct!</span>' : '<span style="color:red">Try again!</span>');
+    };
+  </script>
+  <style>
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-40px); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</body>
+</html>

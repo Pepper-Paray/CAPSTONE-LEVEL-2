@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - Mindcare</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Mindcare</h1>
+    <div class="tabs">
+      <div class="tab" id="loginTab" onclick="window.location.href='login.html'">Login</div>
+      <div class="tab active" id="signupTab" onclick="switchTab('signup')">Sign Up</div>
+    </div>
+    <form id="signupForm">
+      <div class="input-group">
+        <label for="signup-username">Username</label>
+        <input type="text" id="signup-username" required />
+      </div>
+      <div class="input-group">
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password" required />
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('signupForm').onsubmit = function(e) {
+      e.preventDefault();
+      showMainApp();
+    };
+  </script>
+</body>
+</html>

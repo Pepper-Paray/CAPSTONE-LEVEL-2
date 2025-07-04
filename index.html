@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mindcare</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Mindcare</h1>
+    <div class="tabs">
+      <a class="tab active" href="#">Home</a>
+      <a class="tab" href="soothing.html">Soothing Sounds</a>
+      <a class="tab" href="fidget.html">Fidget & Puzzles</a>
+    </div>
+    <div id="motivation" style="margin:18px 0 0 0; font-size:1.08em; color:#4a4a4a; background:#e0f7fa; border-radius:8px; padding:10px 16px;"></div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
+      <b>Welcome, friend.</b> This is a safe space for you to be yourself. Whether you’re feeling anxious, overwhelmed, joyful, or numb, you are seen and valued here. MindMate is here to listen, support, and encourage you—no judgment, just care.
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1em; color:#333; background:#e0c3fc1a; border-radius:8px; padding:10px 16px;">
+      <b>Quick Help & Resources:</b>
+      <ul style="text-align:left; margin:8px 0 0 0; padding-left:18px;">
+        <li><a href="https://www.crisistextline.org/" target="_blank" style="color:#5e60ce;">Crisis Text Line</a> (Text HOME to 741741)</li>
+        <li><a href="https://www.nami.org/Home" target="_blank" style="color:#5e60ce;">NAMI</a> (Mental Health Support)</li>
+        <li><a href="https://www.adhdfoundation.org.uk/" target="_blank" style="color:#5e60ce;">ADHD Foundation</a></li>
+        <li><a href="https://www.ptsd.va.gov/" target="_blank" style="color:#5e60ce;">PTSD Resources</a></li>
+      </ul>
+      <span style="font-size:0.95em;color:#666;">If you need urgent help, please reach out to a trusted person or professional.</span>
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#4a4a4a; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
+      <b>Affirmation of the Moment:</b>
+      <span id="affirmationText" style="display:block;margin:8px 0 0 0;"></span>
+      <button id="newAffirmationBtn" style="margin-top:8px; background:#5e60ce; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Show Another</button>
+    </div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
+      <b>Need a Breather?</b>
+      <button id="breathBtn" style="margin-left:8px; background:#43cea2; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Start Breathing Exercise</button>
+    </div>
+    <div id="breathModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(168,237,234,0.85);z-index:1000;align-items:center;justify-content:center;">
+      <div style="background:#fff;border-radius:16px;padding:32px 24px;box-shadow:0 4px 24px rgba(94,96,206,0.13);text-align:center;max-width:340px;margin:auto;">
+        <h2 style="color:#5e60ce;">Breathing Exercise</h2>
+        <div id="breathGuide" style="font-size:1.3em;margin:18px 0;">Breathe in...</div>
+        <button onclick="closeBreathModal()" style="background:#5e60ce;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1em;cursor:pointer;">Close</button>
+      </div>
+    </div>
+  </div>
+  <div class="main-app" id="mainApp">
+    <div class="mindmate">
+      <h2>MindMate AI</h2>
+      <div class="chat-log" id="chatLog"></div>
+      <form id="chatForm" autocomplete="off">
+        <input type="text" id="chatInput" placeholder="Talk to MindMate..." required />
+        <button type="submit">Send</button>
+      </form>
+      <div style="margin-top:12px;font-size:0.95em;color:#666;">MindMate is here to listen, support, and encourage you. You are not alone.</div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    // Daily Motivation
+    const motivations = [
+      "You are stronger than you think. Keep going!",
+      "Every step forward, no matter how small, is progress.",
+      "You deserve kindness, especially from yourself.",
+      "It's okay to rest. Healing is not a race.",
+      "You are not alone. You matter.",
+      "Your feelings are valid. Take it one moment at a time.",
+      "You are doing your best, and that's enough.",
+      "Small victories are still victories. Celebrate them!",
+      "You have overcome so much already. Be proud of yourself.",
+      "Today is a new day. You can start fresh.",
+      "You are worthy of love and care, exactly as you are.",
+      "It's okay to ask for help. You are not a burden.",
+      "You are resilient, even when it feels hard.",
+      "You are allowed to feel and express your emotions."
+    ];
+    function getTodayMotivation() {
+      const today = new Date();
+      const idx = today.getDate() % motivations.length;
+      const dateStr = today.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+      return `<b>${dateStr}</b><br>${motivations[idx]}`;
+    }
+    document.getElementById('motivation').innerHTML = getTodayMotivation();
+    // Affirmations
+    const affirmations = [
+      "You are enough, just as you are.",
+      "You are worthy of love and care.",
+      "Your feelings matter.",
+      "You are not a burden.",
+      "You are allowed to take up space.",
+      "You are resilient, even on hard days.",
+      "You are not alone in this.",
+      "You are doing your best, and that's enough.",
+      "You are allowed to rest.",
+      "You are brave for facing today.",
+      "You are loved, even when you can't feel it.",
+      "You are important and your story matters.",
+      "You are allowed to feel joy and peace.",
+      "You are strong, even when you feel weak.",
+      "You are healing, one step at a time.",
+      "You are safe in this moment.",
+      "You are valued for who you are."
+    ];
+    function showAffirmation() {
+      const idx = Math.floor(Math.random() * affirmations.length);
+      document.getElementById('affirmationText').innerText = affirmations[idx];
+    }
+    document.getElementById('newAffirmationBtn').onclick = showAffirmation;
+    showAffirmation();
+    // Breathing Exercise
+    const breathBtn = document.getElementById('breathBtn');
+    const breathModal = document.getElementById('breathModal');
+    const breathGuide = document.getElementById('breathGuide');
+    let breathInterval = null;
+    breathBtn.onclick = function() {
+      breathModal.style.display = 'flex';
+      let steps = ["Breathe in...", "Hold...", "Breathe out...", "Hold..."];
+      let idx = 0;
+      breathGuide.innerText = steps[idx];
+      breathInterval = setInterval(() => {
+        idx = (idx + 1) % steps.length;
+        breathGuide.innerText = steps[idx];
+      }, 3500);
+    };
+    window.closeBreathModal = function() {
+      breathModal.style.display = 'none';
+      clearInterval(breathInterval);
+    };
+    // MindMate AI: even more empathetic and validating
+    function getMindMateResponse(input) {
+      const msg = input.trim().toLowerCase();
+      if(msg.includes('hello') || msg.includes('hi')) return "Hi friend! I'm so glad you're here. How are you feeling right now?";
+      if(msg.includes('sad') || msg.includes('upset')) return "I'm really sorry you're feeling this way. It's okay to feel sad. Would you like to talk about it, or maybe try a gentle grounding exercise together?";
+      if(msg.includes('anxious') || msg.includes('anxiety')) return "Anxiety can be tough. Let's take a slow, deep breath together. If you want, I can suggest a calming activity or just listen.";
+      if(msg.includes('tired') || msg.includes('exhausted')) return "You deserve rest. Remember, it's okay to take breaks. Would you like a gentle reminder to care for yourself?";
+      if(msg.includes('trigger') || msg.includes('flashback')) return "I'm here for you. Try to notice your surroundings and remind yourself that you are safe right now. Would you like a grounding technique?";
+      if(msg.includes('adhd')) return "ADHD can make things feel overwhelming. Would you like some tips for focus, or just want to chat?";
+      if(msg.includes('ptsd') || msg.includes('cptsd')) return "You're not alone. Healing is possible, and I'm here to support you. Would you like to talk, or try a gentle activity?";
+      if(msg.includes('thank')) return "You're always welcome! Remember, you matter and your feelings are important.";
+      if(msg.includes('help')) return "Of course! How can I support you right now? I can listen, offer grounding tips, or just be here with you.";
+      if(msg.includes('friend')) return "I'm always here as your friend. You can share anything with me, or we can just sit together in this moment.";
+      if(msg.includes('alone')) return "You are not alone. I'm here with you, and there are people who care about you.";
+      if(msg.includes('overwhelm')) return "When things feel overwhelming, it's okay to pause. Would you like to try a short breathing exercise or talk about what's on your mind?";
+      if(msg.includes('sound') || msg.includes('music')) return "If you'd like, you can visit the Soothing Sounds page for relaxing audio.";
+      if(msg.includes('fidget') || msg.includes('puzzle')) return "The Fidget & Puzzles page has calming activities you might enjoy.";
+      if(msg.includes('panic')) return "Panic can feel scary, but it will pass. Try to focus on your breath and your senses. I'm here with you.";
+      if(msg.includes('angry') || msg.includes('anger')) return "Anger is a valid emotion. Would you like to talk about what's making you feel this way, or try a calming activity?";
+      if(msg.includes('numb')) return "Feeling numb is a common response to overwhelm. You are not broken. I'm here for you, no matter what.";
+      if(msg.includes('joy') || msg.includes('happy')) return "I'm so glad to hear that! Let's celebrate your joy together. What made you feel good today?";
+      if(msg.includes('shame') || msg.includes('guilt')) return "Shame and guilt are heavy feelings, but you are worthy of compassion. Would you like to talk about it or try a self-kindness exercise?";
+      if(msg.includes('safe')) return "I'm glad you feel safe here. This space is for you, always.";
+      if(msg.includes('support')) return "You have my support, always. Is there something specific I can do for you right now?";
+      if(msg.includes('affirm')) return "You are enough. You are worthy. You are loved.";
+      return "I'm here for you, no matter what. You can share anything, or we can just take a moment together. What would feel helpful right now?";
+    }
+    document.getElementById('chatForm').onsubmit = function(e) {
+      e.preventDefault();
+      const chatLog = document.getElementById('chatLog');
+      const chatInput = document.getElementById('chatInput');
+      const userMsg = chatInput.value.trim();
+      if (!userMsg) return;
+      const msgDiv = document.createElement('div');
+      msgDiv.innerHTML = `<b>You:</b> ${userMsg}`;
+      chatLog.appendChild(msgDiv);
+      chatInput.value = '';
+      chatLog.scrollTop = chatLog.scrollHeight;
+      setTimeout(() => {
+        const aiMsg = getMindMateResponse(userMsg);
+        const aiDiv = document.createElement('div');
+        aiDiv.innerHTML = `<b>MindMate:</b> ${aiMsg}`;
+        chatLog.appendChild(aiDiv);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }, 600);
+    };
+  </script>
+</body>
+</html>

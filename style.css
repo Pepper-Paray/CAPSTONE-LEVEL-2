@@ -1,0 +1,160 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+  background-size: 200% 200%;
+  animation: bg-move 12s ease-in-out infinite alternate;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transition: background 0.8s;
+}
+@keyframes bg-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.container {
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  box-shadow: 0 6px 32px rgba(94,96,206,0.10);
+  padding: 36px 28px 24px 28px;
+  margin-top: 40px;
+  width: 92vw;
+  max-width: 420px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.container:before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  opacity: 0.08;
+  z-index: -1;
+}
+h1 {
+  color: #5e60ce;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  gap: 2px;
+}
+.tab {
+  padding: 8px 24px;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  background: #e0e0e0;
+  margin: 0 2px;
+  font-weight: bold;
+  color: #5e60ce;
+  transition: background 0.2s, color 0.2s;
+  outline: none;
+  border: none;
+  box-shadow: 0 2px 6px rgba(94,96,206,0.04);
+}
+.tab.active, .tab:focus {
+  background: linear-gradient(90deg, #5e60ce 60%, #a8edea 100%);
+  color: #fff;
+}
+.tab:hover {
+  background: #b8c0ff;
+  color: #fff;
+}
+.hidden { display: none; }
+.input-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+label { display: block; margin-bottom: 4px; }
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #b8c0ff;
+  margin-bottom: 8px;
+  font-size: 1.05em;
+  background: #f7f7ff;
+  transition: border 0.2s;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+  border: 1.5px solid #5e60ce;
+  outline: none;
+}
+button {
+  background: linear-gradient(90deg, #5e60ce 60%, #a8edea 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 1.08rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(94,96,206,0.08);
+}
+button:hover, button:focus {
+  background: #6930c3;
+  box-shadow: 0 4px 16px rgba(94,96,206,0.13);
+}
+.main-app {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.mindmate {
+  background: #f1f1fb;
+  border-radius: 16px;
+  padding: 20px 18px 16px 18px;
+  width: 340px;
+  box-shadow: 0 2px 12px rgba(94,96,206,0.10);
+  position: relative;
+}
+.mindmate:before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #a8edea 0%, #f1f1fb 100%);
+  opacity: 0.10;
+  z-index: -1;
+}
+.chat-log {
+  min-height: 80px;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 1.01rem;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: 0 1px 4px rgba(94,96,206,0.04);
+}
+::-webkit-scrollbar {
+  width: 8px;
+  background: #e0e0e0;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #b8c0ff;
+  border-radius: 8px;
+}
+#motivation {
+  animation: fadein 1.2s;
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* Fidget and Soothing Sounds remain unchanged, but benefit from new background and button styles */
