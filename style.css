@@ -201,3 +201,231 @@ button:focus, .tab:focus, input:focus {
   outline: 2.5px solid #5e60ce;
   outline-offset: 2px;
 }
+/* --- Dark Theme & MindMate Chat Styles (from HTML) --- */
+body.dark, body[data-theme="dark"] {
+  background: linear-gradient(135deg, #232946 0%, #121629 100%) !important;
+  color: #e0e6f7 !important;
+}
+.container.dark, body[data-theme="dark"] .container {
+  background: #232946 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 32px #12162944 !important;
+  padding-bottom: 24px;
+}
+.tabs.dark, body[data-theme="dark"] .tabs {
+  background: #232946 !important;
+  border-radius: 8px !important;
+}
+.tab.dark, .tab.active.dark, body[data-theme="dark"] .tab, body[data-theme="dark"] .tab.active {
+  color: #a8edea !important;
+  background: transparent !important;
+}
+.tab.active.dark, body[data-theme="dark"] .tab.active {
+  color: #43cea2 !important;
+  font-weight: bold;
+  border-bottom: 2px solid #43cea2 !important;
+}
+h1.dark, h2.dark, b.dark, body[data-theme="dark"] h1, body[data-theme="dark"] h2, body[data-theme="dark"] b {
+  color: #a8edea !important;
+}
+/* Card backgrounds */
+body[data-theme="dark"] [style*="background:#f7f7ff"],
+body[data-theme="dark"] [style*="background:#e0f7fa"],
+body[data-theme="dark"] [style*="background:#fff"],
+body[data-theme="dark"] [style*="background:#fff3cd"] {
+  background: #232946 !important;
+  color: #e0e6f7 !important;
+  border: 1px solid #23294622 !important;
+}
+/* Affirmation glow (dark) */
+.affirmation-active.dark, body[data-theme="dark"] .affirmation-active {
+  animation: glow-dark 1.5s ease-in-out infinite;
+}
+@keyframes glow-dark {
+  0% { text-shadow: 0 0 8px #43cea2, 0 0 16px #232946, 0 0 24px #232946; }
+  100% { text-shadow: 0 0 16px #a8edea, 0 0 32px #43cea2, 0 0 48px #232946; }
+}
+/* Inputs, buttons (dark) */
+input.dark, textarea.dark, select.dark, body[data-theme="dark"] input, body[data-theme="dark"] textarea, body[data-theme="dark"] select {
+  background: #181b2a !important;
+  color: #e0e6f7 !important;
+  border: 1px solid #a8edea !important;
+}
+input.dark:focus, textarea.dark:focus, select.dark:focus, body[data-theme="dark"] input:focus, body[data-theme="dark"] textarea:focus, body[data-theme="dark"] select:focus {
+  border: 2px solid #43cea2 !important;
+  outline: none !important;
+  background: #232946 !important;
+}
+button.dark, body[data-theme="dark"] button {
+  background: #43cea2 !important;
+  color: #232946 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+button.dark:hover, body[data-theme="dark"] button:hover {
+  background: #a8edea !important;
+  color: #232946 !important;
+}
+/* MindMate Chat Styles (dark) */
+#mindmateChat.dark, body[data-theme="dark"] #mindmateChat {
+  background: #181b2a !important;
+  color: #e0e6f7 !important;
+  box-shadow: 0 4px 24px #23294699 !important;
+}
+#chatWindow.dark, body[data-theme="dark"] #chatWindow {
+  background: #232946 !important;
+}
+.chat-bubble.ai.dark, body[data-theme="dark"] .chat-bubble.ai {
+  background: #232946 !important;
+  color: #a8edea !important;
+  border-left: 4px solid #43cea2 !important;
+}
+.chat-bubble.user.dark, body[data-theme="dark"] .chat-bubble.user {
+  background: #181b2a !important;
+  color: #e0e6f7 !important;
+  border-right: 4px solid #a8edea !important;
+}
+#chatInput.dark, body[data-theme="dark"] #chatInput {
+  background: #232946 !important;
+  color: #e0e6f7 !important;
+  border: 1px solid #a8edea !important;
+}
+#chatInput.dark:focus, body[data-theme="dark"] #chatInput:focus {
+  border:2px solid #43cea2 !important; box-shadow:0 0 0 2px #43cea255 !important;
+}
+#typingIndicator.dark, body[data-theme="dark"] #typingIndicator {
+  color: #a8edea !important;
+}
+/* Floating shapes (dark) */
+.floating-shape.dark, body[data-theme="dark"] .floating-shape {
+  opacity: 0.22 !important;
+  filter: brightness(0.7) saturate(1.2) !important;
+}
+/* Visualizer (dark) */
+#visualizer.dark, body[data-theme="dark"] #visualizer {
+  background: #181b2a !important;
+}
+.bar.dark, body[data-theme="dark"] .bar {
+  background: linear-gradient(135deg, #43cea2 60%, #a8edea 100%) !important;
+}
+#visualizer.dark, body[data-theme="dark"] #visualizer {
+  width: 100%;
+  height: 32px;
+  background: #e0f7fa;
+  border-radius: 8px;
+  margin: 12px 0 0 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  overflow: hidden;
+}
+.bar.dark, body[data-theme="dark"] .bar {
+  width: 6px;
+  background: linear-gradient(135deg, #5e60ce 60%, #a8edea 100%);
+  border-radius: 4px 4px 0 0;
+  transition: height 0.2s;
+}
+#gratitudeModal.dark, #visualizeModal.dark, body[data-theme="dark"] #gratitudeModal, body[data-theme="dark"] #visualizeModal {
+  background: rgba(35,41,70,0.92) !important;
+}
+.gratitude-popup.dark, body[data-theme="dark"] .gratitude-popup, body[data-theme="dark"] [style*="background:#fff;"] {
+  background: #232946 !important;
+  color: #e0e6f7 !important;
+  box-shadow: 0 4px 24px #12162955 !important;
+}
+/* API key section (dark) */
+#apiKeySection.dark, body[data-theme="dark"] #apiKeySection {
+  background: #181b2a !important;
+  color: #a8edea !important;
+  border: 1px solid #23294655 !important;
+}
+#particles.dark, body[data-theme="dark"] #particles {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+/* --- Accessibility & Neurodiversity Enhancements --- */
+body {
+  font-size: 1.08em;
+  letter-spacing: 0.02em;
+}
+
+/* Dyslexia-friendly font option */
+body.dyslexia, body[data-font="dyslexia"] {
+  font-family: 'OpenDyslexic', 'Segoe UI', Arial, sans-serif !important;
+}
+
+/* High-contrast mode for visual stress */
+body.high-contrast, body[data-contrast="high"] {
+  background: #000 !important;
+  color: #fff !important;
+}
+body.high-contrast .container, body[data-contrast="high"] .container {
+  background: #111 !important;
+  color: #fff !important;
+  border: 2px solid #43cea2 !important;
+}
+
+/* Animated focus ring for keyboard navigation */
+:focus-visible {
+  outline: 3px solid #43cea2 !important;
+  outline-offset: 3px !important;
+  transition: outline 0.2s;
+}
+
+/* Calming animated border for main container */
+.container.dark, body[data-theme="dark"] .container {
+  border: 2.5px solid;
+  border-image: linear-gradient(135deg, #43cea2 0%, #a8edea 100%) 1;
+  animation: borderPulse 2.5s infinite alternate;
+}
+
+@keyframes borderPulse {
+  0% { border-width: 2.5px; }
+  100% { border-width: 4px; }
+}
+
+/* Floating shape gentle pulse for extra calm */
+.floating-shape {
+  animation: floatShape 18s ease-in-out infinite alternate, floatingPulse 6s ease-in-out infinite alternate;
+}
+@keyframes floatingPulse {
+  0% { filter: blur(0px) brightness(1); }
+  100% { filter: blur(2px) brightness(1.1); }
+}
+
+/* Subtle background overlay for anxiety reduction */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(120deg, #23294622 0 2px, transparent 2px 40px);
+  opacity: 0.08;
+}
+
+/* Large, readable buttons for ADHD and motor accessibility */
+button, .tab {
+  min-height: 44px;
+  min-width: 44px;
+  font-size: 1.12em;
+  letter-spacing: 0.03em;
+}
+
+/* Animated breathing circle for grounding exercise */
+.breathing-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #43cea2 60%, #232946 100%);
+  margin: 0 auto 18px auto;
+  animation: breathingCircleAnim 7s ease-in-out infinite alternate;
+  box-shadow: 0 0 32px #43cea244;
+}
+@keyframes breathingCircleAnim {
+  0% { transform: scale(0.85); opacity: 0.7; }
+  100% { transform: scale(1.15); opacity: 1; }
+}

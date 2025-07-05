@@ -5,331 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mindcare</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      background: linear-gradient(135deg, #232946 0%, #121629 100%) !important;
-      color: #e0e6f7 !important;
-    }
-    /* Floating shapes */
-    .floating-shape {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: float 6s ease-in-out infinite;
-      z-index: 1;
-      opacity: 0.18;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    /* Affirmation glow */
-    .affirmation-active {
-      animation: glow-dark 1.5s ease-in-out infinite;
-    }
-    @keyframes glow-dark {
-      0% { text-shadow: 0 0 8px #43cea2, 0 0 16px #232946, 0 0 24px #232946; }
-      100% { text-shadow: 0 0 16px #a8edea, 0 0 32px #43cea2, 0 0 48px #232946; }
-    }
-    /* MindMate Chat Styles */
-    #mindmateChat { font-family: inherit; }
-    #chatWindow { display: flex; flex-direction: column; gap: 0.5em; min-height: 60px; }
-    .chat-bubble.ai { background: #232946; color: #a8edea; align-self: flex-start; border-left: 4px solid #43cea2; }
-    .chat-bubble.user { background: #181b2a; color: #e0e6f7; align-self: flex-end; border-right: 4px solid #a8edea; }
-    #chatInput {
-      background: #232946 !important;
-      color: #e0e6f7 !important;
-      border: 1px solid #a8edea !important;
-    }
-    #chatInput:focus { border:2px solid #43cea2 !important; box-shadow:0 0 0 2px #43cea255 !important; }
-    #typingIndicator { color: #a8edea !important; }
-    /* Container and Sections */
-    .container {
-      background: #232946 !important;
-      border-radius: 18px !important;
-      box-shadow: 0 4px 32px #12162944 !important;
-      padding-bottom: 24px;
-    }
-    .tabs {
-      background: #232946 !important;
-      border-radius: 8px !important;
-    }
-    .tab, .tab.active {
-      color: #a8edea !important;
-      background: transparent !important;
-    }
-    .tab.active {
-      color: #43cea2 !important;
-      font-weight: bold;
-      border-bottom: 2px solid #43cea2 !important;
-    }
-    h1, h2, b {
-      color: #a8edea !important;
-    }
-    /* Card backgrounds */
-    [style*="background:#f7f7ff"], [style*="background:#e0f7fa"], [style*="background:#fff"], [style*="background:#fff3cd"] {
-      background: #232946 !important;
-      color: #e0e6f7 !important;
-      border: 1px solid #23294622 !important;
-    }
-    /* Inputs, buttons */
-    input, textarea, select {
-      background: #181b2a !important;
-      color: #e0e6f7 !important;
-      border: 1px solid #a8edea !important;
-    }
-    input:focus, textarea:focus, select:focus {
-      border: 2px solid #43cea2 !important;
-      outline: none !important;
-      background: #232946 !important;
-    }
-    button {
-      background: #43cea2 !important;
-      color: #232946 !important;
-      border: none !important;
-      border-radius: 8px !important;
-      font-weight: 600 !important;
-    }
-    button:hover {
-      background: #a8edea !important;
-      color: #232946 !important;
-    }
-    /* API key section */
-    #apiKeySection {
-      background: #181b2a !important;
-      color: #a8edea !important;
-      border: 1px solid #23294655 !important;
-    }
-  </style>
 </head>
-<body>
+<body class="dark" data-theme="dark">
   <!-- Immersive Floating Shapes -->
-  <div class="floating-shape" style="top:12%;left:8%;width:60px;height:60px;background:radial-gradient(circle,#fed6e3 60%,#fff0 100%);"></div>
-  <div class="floating-shape" style="top:70%;left:80%;width:44px;height:44px;background:radial-gradient(circle,#a8edea 60%,#fff0 100%);"></div>
-  <div class="floating-shape" style="top:40%;left:60%;width:36px;height:36px;background:radial-gradient(circle,#b8c0ff 60%,#fff0 100%);"></div>
-  <div class="container">
-    <h1>Mindcare</h1>
-    <div class="tabs">
-      <a class="tab active" href="#">Home</a>
-      <a class="tab" href="soothing.html">Soothing Sounds</a>
-      <a class="tab" href="puzzles.html">Puzzles</a>
+  <div class="floating-shape"></div>
+  <div class="floating-shape"></div>
+  <div class="floating-shape"></div>
+  <div class="container dark">
+    <h1 class="dark">Mindcare</h1>
+    <div class="tabs dark">
+      <a class="tab active dark" href="#">Home</a>
+      <a class="tab dark" href="soothing.html">Soothing Sounds</a>
+      <a class="tab dark" href="puzzles.html">Puzzles</a>
     </div>
-    <div id="motivation" style="margin:18px 0 0 0; font-size:1.08em; color:#4a4a4a; background:#e0f7fa; border-radius:8px; padding:10px 16px;"></div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
-      <b>Welcome, friend.</b> This is a safe space for you to be yourself. Whether you’re feeling anxious, overwhelmed, joyful, or numb, you are seen and valued here. MindMate is here to listen, support, and encourage you—no judgment, just care.
+    <div id="motivation" class="dark"></div>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">Welcome, friend.</b> This is a safe space for you to be yourself. Whether you’re feeling anxious, overwhelmed, joyful, or numb, you are seen and valued here. MindMate is here to listen, support, and encourage you—no judgment, just care.
     </div>
-    <div style="margin:18px 0 0 0; font-size:1em; color:#333; background:#e0c3fc1a; border-radius:8px; padding:10px 16px;">
-      <b>Quick Help & Resources:</b>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">Quick Help & Resources:</b>
       <ul style="text-align:left; margin:8px 0 0 0; padding-left:18px;">
-        <li><a href="https://www.crisistextline.org/" target="_blank" style="color:#5e60ce;">Crisis Text Line</a> (Text HOME to 741741)</li>
-        <li><a href="https://www.nami.org/Home" target="_blank" style="color:#5e60ce;">NAMI</a> (Mental Health Support)</li>
-        <li><a href="https://www.adhdfoundation.org.uk/" target="_blank" style="color:#5e60ce;">ADHD Foundation</a></li>
-        <li><a href="https://www.ptsd.va.gov/" target="_blank" style="color:#5e60ce;">PTSD Resources</a></li>
+        <li><a href="https://www.crisistextline.org/" target="_blank">Crisis Text Line</a> (Text HOME to 741741)</li>
+        <li><a href="https://www.nami.org/Home" target="_blank">NAMI</a> (Mental Health Support)</li>
+        <li><a href="https://www.adhdfoundation.org.uk/" target="_blank">ADHD Foundation</a></li>
+        <li><a href="https://www.ptsd.va.gov/" target="_blank">PTSD Resources</a></li>
       </ul>
-      <span style="font-size:0.95em;color:#666;">If you need urgent help, please reach out to a trusted person or professional.</span>
+      <span style="font-size:0.95em;">If you need urgent help, please reach out to a trusted person or professional.</span>
     </div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#4a4a4a; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
-      <b>Affirmation of the Moment:</b>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">Affirmation of the Moment:</b>
       <span id="affirmationText" style="display:block;margin:8px 0 0 0;"></span>
-      <button id="newAffirmationBtn" style="margin-top:8px; background:#5e60ce; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Show Another</button>
+      <button id="newAffirmationBtn" class="dark" style="margin-top:8px;">Show Another</button>
     </div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
-      <b>Need a Breather?</b>
-      <button id="breathBtn" style="margin-left:8px; background:#43cea2; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Start Breathing Exercise</button>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">Need a Breather?</b>
+      <button id="breathBtn" class="dark" style="margin-left:8px;">Start Breathing Exercise</button>
     </div>
-    <!-- Interactive: Daily Mood Reflection -->
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#43cea2; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
-      <b>How are you feeling today?</b>
-      <input id="moodInput" type="text" placeholder="Type a word or phrase..." style="margin:0 8px 0 8px; border-radius:6px; padding:6px; border:1px solid #b8c0ff;" />
-      <button id="moodSaveBtn" style="background:#43cea2; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Save</button>
-      <span id="moodSavedMsg" style="margin-left:12px;color:#5e60ce;"></span>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">How are you feeling today?</b>
+      <input id="moodInput" type="text" placeholder="Type a word or phrase..." class="dark" />
+      <button id="moodSaveBtn" class="dark">Save</button>
+      <span id="moodSavedMsg"></span>
     </div>
-    <div id="breathModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(168,237,234,0.85);z-index:1000;align-items:center;justify-content:center;">
-      <div style="background:#fff;border-radius:16px;padding:32px 24px;box-shadow:0 4px 24px rgba(94,96,206,0.13);text-align:center;max-width:340px;margin:auto;">
-        <h2 style="color:#5e60ce;">Breathing Exercise</h2>
+    <div id="freeQuote" class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;"></div>
+    <div id="breathModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1000;align-items:center;justify-content:center;">
+      <div class="dark" style="background:#232946;border-radius:16px;padding:32px 24px;box-shadow:0 4px 24px #12162955;text-align:center;max-width:340px;margin:auto;">
+        <h2 class="dark">Breathing Exercise</h2>
         <div id="breathGuide" style="font-size:1.3em;margin:18px 0;">Breathe in...</div>
-        <button onclick="closeBreathModal()" style="background:#5e60ce;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1em;cursor:pointer;">Close</button>
+        <button onclick="closeBreathModal()" class="dark">Close</button>
       </div>
     </div>
   </div>
-  <!-- MindMate AI Chat (Immersive, Trauma-Informed, OpenAI-powered) -->
-  <div id="mindmateChat" style="margin:32px 0 0 0; background:#f7f7ff; border-radius:16px; box-shadow:0 4px 24px rgba(94,96,206,0.09); padding:0 0 18px 0; max-width:480px; margin-left:auto; margin-right:auto;">
+  <div id="mindmateChat" class="dark" style="margin:32px 0 0 0; border-radius:16px; box-shadow:0 4px 24px #23294699; padding:0 0 18px 0; max-width:480px; margin-left:auto; margin-right:auto;">
     <div style="display:flex;align-items:center;gap:12px;padding:18px 18px 0 18px;">
-      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="MindMate avatar" style="width:48px;height:48px;border-radius:50%;background:#e0f7fa;box-shadow:0 2px 8px #a8edea44;" />
-      <div style="font-size:1.25em;color:#5e60ce;font-weight:600;">MindMate</div>
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="MindMate avatar" style="width:48px;height:48px;border-radius:50%;background:#232946;box-shadow:0 2px 8px #a8edea44;" />
+      <div style="font-size:1.25em; font-weight:600; color:#a8edea;">MindMate</div>
     </div>
-    <div id="chatWindow" style="max-height:260px;overflow-y:auto;padding:12px 18px 0 18px;"></div>
+    <div id="chatWindow" class="dark" style="max-height:260px;overflow-y:auto;padding:12px 18px 0 18px;"></div>
     <form id="chatForm" style="display:flex;gap:8px;align-items:center;padding:0 18px 0 18px;margin-top:8px;" autocomplete="off">
-      <input id="chatInput" type="text" placeholder="Type your thoughts or feelings..." aria-label="Type your message to MindMate" style="flex:1;padding:10px 12px;border-radius:8px;border:1px solid #b8c0ff;font-size:1em;outline:none;" required />
-      <button type="submit" style="background:#43cea2;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:1em;cursor:pointer;">Send</button>
+      <input id="chatInput" type="text" placeholder="Type your thoughts or feelings..." aria-label="Type your message to MindMate" class="dark" required />
+      <button type="submit" class="dark">Send</button>
     </form>
-    <div id="typingIndicator" style="padding:0 18px;color:#b8c0ff;font-size:0.98em;display:none;">MindMate is typing...</div>
+    <div id="typingIndicator" class="dark" style="padding:0 18px;font-size:0.98em;display:none;">MindMate is typing...</div>
   </div>
-  <!-- MindMate OpenAI API Key Input (for privacy, not stored) -->
-  <div id="apiKeySection" style="max-width:480px;margin:18px auto 0 auto;padding:10px 18px;background:#fff3cd;border-radius:10px;color:#856404;font-size:0.98em;box-shadow:0 2px 8px #ffe06633;">
-    <b>🔒 MindMate OpenAI API Key</b><br>
+  <div id="apiKeySection" class="dark" style="max-width:480px;margin:18px auto 0 auto;padding:10px 18px;border-radius:10px;font-size:0.98em;box-shadow:0 2px 8px #ffe06633;">
+    <b class="dark">🔒 MindMate OpenAI API Key</b><br>
     <span>Enter your OpenAI API key to enable MindMate chat. <b>Your key is never saved or sent anywhere except OpenAI.</b> For privacy, it is only kept in memory and will be forgotten if you reload the page.</span><br>
-    <input id="openaiKeyInput" type="password" placeholder="sk-..." style="margin:8px 0 0 0;width:70%;padding:6px 10px;border-radius:6px;border:1px solid #b8c0ff;" />
-    <button id="saveKeyBtn" style="background:#43cea2;color:#fff;border:none;border-radius:6px;padding:6px 18px;font-size:1em;cursor:pointer;margin-left:8px;">Save Key</button>
-    <span id="keySavedMsg" style="margin-left:12px;color:#43cea2;"></span>
+    <input id="openaiKeyInput" type="password" placeholder="sk-..." class="dark" />
+    <button id="saveKeyBtn" class="dark">Save Key</button>
+    <span id="keySavedMsg"></span>
   </div>
   <script src="script.js"></script>
-  <script>
-    // Daily Motivation
-    const motivations = [
-      "You are stronger than you think. Keep going!",
-      "Every step forward, no matter how small, is progress.",
-      "You deserve kindness, especially from yourself.",
-      "It's okay to rest. Healing is not a race.",
-      "You are not alone. You matter.",
-      "Your feelings are valid. Take it one moment at a time.",
-      "You are doing your best, and that's enough.",
-      "Small victories are still victories. Celebrate them!",
-      "You have overcome so much already. Be proud of yourself.",
-      "Today is a new day. You can start fresh.",
-      "You are worthy of love and care, exactly as you are.",
-      "It's okay to ask for help. You are not a burden.",
-      "You are resilient, even when it feels hard.",
-      "You are allowed to feel and express your emotions."
-    ];
-    function getTodayMotivation() {
-      const today = new Date();
-      const idx = today.getDate() % motivations.length;
-      const dateStr = today.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-      return `<b>${dateStr}</b><br>${motivations[idx]}`;
-    }
-    document.getElementById('motivation').innerHTML = getTodayMotivation();
-    // Affirmations
-    const affirmations = [
-      "You are enough, just as you are.",
-      "You are worthy of love and care.",
-      "Your feelings matter.",
-      "You are not a burden.",
-      "You are allowed to take up space.",
-      "You are resilient, even on hard days.",
-      "You are not alone in this.",
-      "You are doing your best, and that's enough.",
-      "You are allowed to rest.",
-      "You are brave for facing today.",
-      "You are loved, even when you can't feel it.",
-      "You are important and your story matters.",
-      "You are allowed to feel joy and peace.",
-      "You are strong, even when you feel weak.",
-      "You are healing, one step at a time.",
-      "You are safe in this moment.",
-      "You are valued for who you are."
-    ];
-    // --- Affirmation Glow ---
-    const affirmationText = document.getElementById('affirmationText');
-    const newAffirmationBtn = document.getElementById('newAffirmationBtn');
-    function showAffirmation() {
-      const idx = Math.floor(Math.random() * affirmations.length);
-      affirmationText.innerText = affirmations[idx];
-      affirmationText.classList.add('affirmation-active');
-      setTimeout(()=>affirmationText.classList.remove('affirmation-active'), 1800);
-    }
-    newAffirmationBtn.onclick = showAffirmation;
-    showAffirmation();
-    // Breathing Exercise
-    const breathBtn = document.getElementById('breathBtn');
-    const breathModal = document.getElementById('breathModal');
-    const breathGuide = document.getElementById('breathGuide');
-    let breathInterval = null;
-    breathBtn.onclick = function() {
-      breathModal.style.display = 'flex';
-      let steps = ["Breathe in...", "Hold...", "Breathe out...", "Hold..."];
-      let idx = 0;
-      breathGuide.innerText = steps[idx];
-      breathInterval = setInterval(() => {
-        idx = (idx + 1) % steps.length;
-        breathGuide.innerText = steps[idx];
-      }, 3500);
-    };
-    window.closeBreathModal = function() {
-      breathModal.style.display = 'none';
-      clearInterval(breathInterval);
-    };
-    // Interactive: Mood Reflection
-    document.getElementById('moodSaveBtn').onclick = function() {
-      const mood = document.getElementById('moodInput').value.trim();
-      if(mood) {
-        localStorage.setItem('mindcareMood', mood);
-        document.getElementById('moodSavedMsg').innerText = 'Saved!';
-      } else {
-        document.getElementById('moodSavedMsg').innerText = '';
-      }
-    };
-    // --- MindMate OpenAI API Key Logic (placeholder mode) ---
-    let openaiApiKey = '';
-    document.getElementById('saveKeyBtn').onclick = function() {
-      const val = document.getElementById('openaiKeyInput').value.trim();
-      if(val.startsWith('sk-') && val.length > 30) {
-        openaiApiKey = val;
-        document.getElementById('keySavedMsg').innerText = 'Key saved (demo mode: no real AI)';
-        setTimeout(()=>{document.getElementById('keySavedMsg').innerText='';}, 3000);
-      } else {
-        document.getElementById('keySavedMsg').innerText = 'Invalid key';
-      }
-    };
-    // --- MindMate AI Chat Placeholder Logic ---
-    const chatWindow = document.getElementById('chatWindow');
-    const chatForm = document.getElementById('chatForm');
-    const chatInput = document.getElementById('chatInput');
-    const typingIndicator = document.getElementById('typingIndicator');
-
-    const supportiveResponses = [
-      "I'm here for you. You are not alone.",
-      "Thank you for sharing. Your feelings are valid.",
-      "It's okay to take things one step at a time.",
-      "You are doing your best, and that's enough.",
-      "Would you like to try a calming activity or just talk?",
-      "Remember to be gentle with yourself today.",
-      "If things feel overwhelming, it's okay to pause and breathe.",
-      "You are worthy of care and kindness.",
-      "If you need more support, consider reaching out to a trusted person or therapist."
-    ];
-
-    function addChatBubble(text, sender) {
-      const bubble = document.createElement('div');
-      bubble.className = sender === 'user' ? 'chat-bubble user' : 'chat-bubble ai';
-      bubble.setAttribute('role', 'region');
-      bubble.setAttribute('aria-live', 'polite');
-      bubble.style.margin = '8px 0';
-      bubble.style.maxWidth = '80%';
-      bubble.style.padding = '12px 16px';
-      bubble.style.borderRadius = sender === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px';
-      bubble.style.background = sender === 'user' ? '#e0f7fa' : '#5e60ce';
-      bubble.style.color = sender === 'user' ? '#4a4a4a' : '#fff';
-      bubble.style.alignSelf = sender === 'user' ? 'flex-end' : 'flex-start';
-      bubble.style.boxShadow = '0 2px 8px #a8edea22';
-      bubble.innerText = text;
-      chatWindow.appendChild(bubble);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
-
-    // Initial greeting
-    if(chatWindow.childElementCount === 0) {
-      addChatBubble("Hi, I'm MindMate. How are you feeling today?", 'ai');
-    }
-
-    chatForm.onsubmit = function(e) {
-      e.preventDefault();
-      const userMsg = chatInput.value.trim();
-      if(!userMsg) return;
-      addChatBubble(userMsg, 'user');
-      chatInput.value = '';
-      typingIndicator.style.display = 'block';
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-      setTimeout(()=>{
-        typingIndicator.style.display = 'none';
-        if(openaiApiKey) {
-          addChatBubble("[Demo] No real AI is used. This is a placeholder response.", 'ai');
-        } else {
-          const idx = Math.floor(Math.random() * supportiveResponses.length);
-          addChatBubble(supportiveResponses[idx], 'ai');
-        }
-      }, 700 + Math.random()*600);
-    };
-  </script>
 </body>
 </html>

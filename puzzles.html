@@ -5,189 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Puzzles - Mindcare</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      background: linear-gradient(135deg, #232946 0%, #121629 100%) !important;
-      color: #e0e6f7 !important;
-    }
-    .container {
-      background: #232946 !important;
-      border-radius: 18px !important;
-      box-shadow: 0 4px 32px #12162944 !important;
-      padding-bottom: 24px;
-    }
-    .tabs {
-      background: #232946 !important;
-      border-radius: 8px !important;
-    }
-    .tab, .tab.active {
-      color: #a8edea !important;
-      background: transparent !important;
-    }
-    .tab.active {
-      color: #43cea2 !important;
-      font-weight: bold;
-      border-bottom: 2px solid #43cea2 !important;
-    }
-    h1, h2, b {
-      color: #a8edea !important;
-    }
-    /* Card backgrounds */
-    [style*="background:#f7f7ff"], [style*="background:#e0f7fa"], [style*="background:#fff"], [style*="background:#fff3cd"] {
-      background: #232946 !important;
-      color: #e0e6f7 !important;
-      border: 1px solid #23294622 !important;
-    }
-    /* Affirmation glow */
-    .affirmation-active {
-      animation: glow-dark 1.5s ease-in-out infinite;
-    }
-    @keyframes glow-dark {
-      0% { text-shadow: 0 0 8px #43cea2, 0 0 16px #232946, 0 0 24px #232946; }
-      100% { text-shadow: 0 0 16px #a8edea, 0 0 32px #43cea2, 0 0 48px #232946; }
-    }
-    /* Inputs, buttons */
-    input, textarea, select {
-      background: #181b2a !important;
-      color: #e0e6f7 !important;
-      border: 1px solid #a8edea !important;
-    }
-    input:focus, textarea:focus, select:focus {
-      border: 2px solid #43cea2 !important;
-      outline: none !important;
-      background: #232946 !important;
-    }
-    button {
-      background: #43cea2 !important;
-      color: #232946 !important;
-      border: none !important;
-      border-radius: 8px !important;
-      font-weight: 600 !important;
-    }
-    button:hover {
-      background: #a8edea !important;
-      color: #232946 !important;
-    }
-    /* Floating shapes (dark) */
-    .floating-shape {
-      opacity: 0.22 !important;
-      filter: brightness(0.7) saturate(1.2) !important;
-    }
-  </style>
 </head>
-<body>
+<body class="dark" data-theme="dark">
   <!-- Immersive Floating Shapes -->
-  <div class="floating-shape" style="top:12%;left:8%;width:60px;height:60px;background:radial-gradient(circle,#fed6e3 60%,#fff0 100%);"></div>
-  <div class="floating-shape" style="top:70%;left:80%;width:44px;height:44px;background:radial-gradient(circle,#a8edea 60%,#fff0 100%);"></div>
-  <div class="floating-shape" style="top:40%;left:60%;width:36px;height:36px;background:radial-gradient(circle,#b8c0ff 60%,#fff0 100%);"></div>
+  <div class="floating-shape"></div>
+  <div class="floating-shape"></div>
+  <div class="floating-shape"></div>
   <canvas id="particles"></canvas>
-  <div class="container">
-    <h1>Daily Jigsaw Puzzles</h1>
-    <div class="tabs">
-      <a class="tab" href="index.html">Home</a>
-      <a class="tab" href="soothing.html">Soothing Sounds</a>
-      <a class="tab active" href="#">Puzzles</a>
+  <div class="container dark">
+    <h1 class="dark">Daily Jigsaw Puzzles</h1>
+    <div class="tabs dark">
+      <a class="tab dark" href="index.html">Home</a>
+      <a class="tab dark" href="soothing.html">Soothing Sounds</a>
+      <a class="tab active dark" href="#">Puzzles</a>
     </div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
-      <b>Welcome to your puzzle space.</b> Enjoy a new set of relaxing jigsaw puzzles every day. Choose your challenge and take your time—there's no rush!
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">Welcome to your puzzle space.</b> Enjoy a new set of relaxing jigsaw puzzles every day. Choose your challenge and take your time—there's no rush!
     </div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#4a4a4a; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
-      <b>Affirmation of the Moment:</b>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">Affirmation of the Moment:</b>
       <span id="affirmationText" style="display:block;margin:8px 0 0 0;"></span>
-      <button id="newAffirmationBtn" style="margin-top:8px; background:#5e60ce; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Show Another</button>
+      <button id="newAffirmationBtn" class="dark" style="margin-top:8px;">Show Another</button>
     </div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
-      <b>Need a Breather?</b>
-      <button id="breathBtn" style="margin-left:8px; background:#43cea2; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Start Breathing Exercise</button>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">Need a Breather?</b>
+      <button id="breathBtn" class="dark" style="margin-left:8px;">Start Breathing Exercise</button>
     </div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
-      <b>Gratitude Journal</b>
-      <button id="gratitudeBtn" style="margin-left:8px; background:#5e60ce; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Write Now</button>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
+      <b class="dark">Gratitude Journal</b>
+      <button id="gratitudeBtn" class="dark" style="margin-left:8px;">Write Now</button>
     </div>
     <div id="gratitudeModal">
-      <div class="gratitude-popup" style="background:#fff;border-radius:16px;padding:32px 24px;box-shadow:0 4px 24px rgba(94,96,206,0.13);text-align:center;max-width:340px;margin:auto;">
-        <h2 style="color:#5e60ce;">Gratitude Journal</h2>
-        <textarea id="gratitudeText" rows="4" style="width:90%;border-radius:8px;padding:8px;"></textarea>
-        <div id="gratitudeMsg" style="margin:8px 0 0 0;color:#43cea2;"></div>
-        <button onclick="closeGratitudeModal()" style="background:#5e60ce;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1em;cursor:pointer;">Close</button>
-        <button onclick="saveGratitude()" style="background:#43cea2;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1em;cursor:pointer;margin-left:8px;">Save</button>
+      <div class="gratitude-popup dark">
+        <h2 class="dark">Gratitude Journal</h2>
+        <textarea id="gratitudeText" rows="4" class="dark"></textarea>
+        <div id="gratitudeMsg"></div>
+        <button onclick="closeGratitudeModal()" class="dark">Close</button>
+        <button onclick="saveGratitude()" class="dark">Save</button>
       </div>
     </div>
     <div style="margin-top:32px;">
-      <label for="puzzleSelect"><b>Choose Your Puzzle:</b></label>
-      <select id="puzzleSelect"></select>
+      <label for="puzzleSelect"><b class="dark">Choose Your Puzzle:</b></label>
+      <select id="puzzleSelect" class="dark"></select>
       <div id="puzzleArea" style="margin-top:16px;"></div>
     </div>
-    <!-- Interactive: Puzzle Completion Tracker -->
-    <div id="puzzleTracker" style="margin-top:24px;font-size:1.05em;color:#43cea2;"></div>
+    <div id="freeQuote" class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;"></div>
   </div>
   <script src="script.js"></script>
-  <script>
-    // ...existing code for particles, affirmations, breathing, gratitude...
-    // --- Daily Jigsaw Puzzle Options ---
-    const puzzleImages = [
-      { url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80', title: 'Forest Stream' },
-      { url: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80', title: 'Mountain Lake' },
-      { url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80', title: 'Sunset Beach' },
-      { url: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3c5c?auto=format&fit=crop&w=400&q=80', title: 'Wildflowers' },
-      { url: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80', title: 'Calm Ocean' },
-      { url: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80', title: 'Peaceful Lake' },
-      { url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80', title: 'Misty Forest' },
-      { url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80', title: 'Golden Sunset' }
-    ];
-    const pieceOptions = [20, 50, 100, 500];
-    function getDailySeed() {
-      const d = new Date();
-      return d.getFullYear()*10000 + (d.getMonth()+1)*100 + d.getDate();
-    }
-    function seededShuffle(array, seed) {
-      let arr = array.slice();
-      let m = arr.length, t, i;
-      function random() {
-        var x = Math.sin(seed++) * 10000;
-        return x - Math.floor(x);
-      }
-      while (m) {
-        i = Math.floor(random() * m--);
-        t = arr[m];
-        arr[m] = arr[i];
-        arr[i] = t;
-      }
-      return arr;
-    }
-    function getDailyPuzzles() {
-      const seed = getDailySeed();
-      const shuffled = seededShuffle(puzzleImages, seed);
-      return shuffled.slice(0, 4).map((img, idx) => {
-        return pieceOptions.map(pieces => ({
-          url: img.url,
-          title: img.title + ' (' + pieces + ' pieces)',
-          pieces
-        }));
-      }).flat();
-    }
-    const puzzleSelect = document.getElementById('puzzleSelect');
-    const dailyPuzzles = getDailyPuzzles();
-    puzzleSelect.innerHTML = '<option value="none">-- Choose --</option>' +
-      dailyPuzzles.map((p, i) => `<option value="${i}">${p.title}</option>`).join('');
-    puzzleSelect.onchange = function() {
-      const idx = this.value;
-      const area = document.getElementById('puzzleArea');
-      if(idx === 'none') { area.innerHTML = ''; return; }
-      const puzzle = dailyPuzzles[idx];
-      // Use JSPuzzles with direct image upload (public image link)
-      // If this fails, provide a fallback to a popular jigsaw puzzle site
-      const fallbackUrl = `https://im-a-puzzle.com/?puzzle=${encodeURIComponent(puzzle.url)}&pieces=${puzzle.pieces}`;
-      area.innerHTML = `<iframe src="${fallbackUrl}" width="100%" height="480" style="border:none;border-radius:12px;box-shadow:0 2px 12px #5e60ce22;"></iframe><div style='margin-top:8px;font-size:1em;color:#5e60ce;'>${puzzle.title}</div><div style='font-size:0.95em;color:#b00;margin-top:8px;'>If the puzzle does not load, <a href='${fallbackUrl}' target='_blank' style='color:#5e60ce;'>click here to open it in a new tab</a> or try <a href='https://www.thejigsawpuzzles.com/' target='_blank' style='color:#5e60ce;'>TheJigsawPuzzles.com</a>.</div>`;
-    };
-    function updatePuzzleTracker() {
-      let completed = JSON.parse(localStorage.getItem('completedPuzzles')||'[]');
-      let today = new Date().toDateString();
-      let count = completed.filter(p=>p.date===today).length;
-      document.getElementById('puzzleTracker').innerText = `Puzzles completed today: ${count}`;
-    }
-    updatePuzzleTracker();
-    // ...existing code for affirmations, breathing, gratitude...
-  </script>
 </body>
 </html>
