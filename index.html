@@ -2,17 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Mindcare</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#232946" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
 </head>
 <body class="dark" data-theme="dark">
+  <canvas id="lavaLamp"></canvas>
   <!-- Immersive Floating Shapes -->
   <div class="floating-shape"></div>
   <div class="floating-shape"></div>
   <div class="floating-shape"></div>
   <div class="container dark">
-    <h1 class="dark">Mindcare</h1>
+    <h1 id="bubbleTitle"></h1>
+    <div id="mentalTip" class="dark" style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;"></div>
     <div class="tabs dark">
       <a class="tab active dark" href="#">Home</a>
       <a class="tab dark" href="soothing.html">Soothing Sounds</a>
@@ -48,12 +53,13 @@
       <span id="moodSavedMsg"></span>
     </div>
     <div id="freeQuote" class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;"></div>
-    <div id="breathModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1000;align-items:center;justify-content:center;">
-      <div class="dark" style="background:#232946;border-radius:16px;padding:32px 24px;box-shadow:0 4px 24px #12162955;text-align:center;max-width:340px;margin:auto;">
-        <h2 class="dark">Breathing Exercise</h2>
-        <div id="breathGuide" style="font-size:1.3em;margin:18px 0;">Breathe in...</div>
-        <button onclick="closeBreathModal()" class="dark">Close</button>
-      </div>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#181b2a; color:#a8edea;">
+      <b class="dark">MindMate AI</b><br>
+      <span style="font-size:1em; color:#43cea2;">MindMate is always here to listen and support you with caring, trauma-informed responses. No key needed—just type and connect.</span>
+    </div>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;">
+      <b class="dark">🌈 Accessibility & Variety</b><br>
+      <span style="font-size:1em; color:#43cea2;">Toggle dyslexia font or high-contrast mode at the bottom left. Enjoy animated breathing, floating shapes, and a calming, responsive design for all devices.</span>
     </div>
   </div>
   <div id="mindmateChat" class="dark" style="margin:32px 0 0 0; border-radius:16px; box-shadow:0 4px 24px #23294699; padding:0 0 18px 0; max-width:480px; margin-left:auto; margin-right:auto;">
@@ -68,13 +74,33 @@
     </form>
     <div id="typingIndicator" class="dark" style="padding:0 18px;font-size:0.98em;display:none;">MindMate is typing...</div>
   </div>
-  <div id="apiKeySection" class="dark" style="max-width:480px;margin:18px auto 0 auto;padding:10px 18px;border-radius:10px;font-size:0.98em;box-shadow:0 2px 8px #ffe06633;">
-    <b class="dark">🔒 MindMate OpenAI API Key</b><br>
-    <span>Enter your OpenAI API key to enable MindMate chat. <b>Your key is never saved or sent anywhere except OpenAI.</b> For privacy, it is only kept in memory and will be forgotten if you reload the page.</span><br>
-    <input id="openaiKeyInput" type="password" placeholder="sk-..." class="dark" />
-    <button id="saveKeyBtn" class="dark">Save Key</button>
-    <span id="keySavedMsg"></span>
-  </div>
   <script src="script.js"></script>
+  <script>
+    // Bubble Letters Title
+    const title = 'Mindcare Home';
+    const bubbleTitle = document.getElementById('bubbleTitle');
+    if (bubbleTitle) {
+      bubbleTitle.innerHTML = '';
+      for(let i=0;i<title.length;i++) {
+        const span = document.createElement('span');
+        span.className = 'bubble-letter';
+        span.innerText = title[i] === ' ' ? '\u00A0' : title[i];
+        span.style.animationDelay = (i*0.08)+'s';
+        bubbleTitle.appendChild(span);
+      }
+    }
+    // Mental Health Tip API
+    fetch('https://mentalhealthapi.vercel.app/api/tip')
+      .then(r=>r.json()).then(data=>{
+        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> '+data.tip;
+      }).catch(()=>{
+        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> Take a deep breath and remember you are enough!';
+      });
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
 </body>
 </html>

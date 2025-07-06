@@ -1,0 +1,13 @@
+{
+  "name": "Mindcare",
+  "short_name": "Mindcare",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#232946",
+  "theme_color": "#232946",
+  "description": "A trauma-informed, neurodiversity-friendly mental wellness PWA for PTSD, CPTSD, ADHD, dyslexia, anxiety, and more.",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -2,17 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Sign Up - Mindcare</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#232946" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
 </head>
 <body class="dark" data-theme="dark">
+  <canvas id="lavaLamp"></canvas>
   <!-- Immersive Floating Shapes -->
   <div class="floating-shape"></div>
   <div class="floating-shape"></div>
   <div class="floating-shape"></div>
   <div class="container dark">
-    <h1 class="dark">Mindcare</h1>
+    <h1 id="bubbleTitle"></h1>
+    <div id="mentalTip" class="dark" style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;"></div>
     <div class="tabs dark">
       <div class="tab dark" id="loginTab" onclick="window.location.href='login.html'">Login</div>
       <div class="tab active dark" id="signupTab">Sign Up</div>
@@ -38,7 +43,42 @@
       <span id="signupReasonSavedMsg"></span>
     </div>
     <div id="freeQuote" class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;"></div>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#181b2a; color:#a8edea;">
+      <b class="dark">MindMate AI</b><br>
+      <span style="font-size:1em; color:#43cea2;">MindMate is always here to listen and support you with caring, trauma-informed responses. No key needed—just type and connect.</span>
+    </div>
+    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;">
+      <b class="dark">🌈 Accessibility & Variety</b><br>
+      <span style="font-size:1em; color:#43cea2;">Toggle dyslexia font or high-contrast mode at the bottom left. Enjoy animated breathing, floating shapes, and a calming, responsive design for all devices.</span>
+    </div>
   </div>
   <script src="script.js"></script>
+  <script>
+    // Bubble Letters Title
+    const title = 'Mindcare Sign Up';
+    const bubbleTitle = document.getElementById('bubbleTitle');
+    if (bubbleTitle) {
+      bubbleTitle.innerHTML = '';
+      for(let i=0;i<title.length;i++) {
+        const span = document.createElement('span');
+        span.className = 'bubble-letter';
+        span.innerText = title[i] === ' ' ? '\u00A0' : title[i];
+        span.style.animationDelay = (i*0.08)+'s';
+        bubbleTitle.appendChild(span);
+      }
+    }
+    // Mental Health Tip API
+    fetch('https://mentalhealthapi.vercel.app/api/tip')
+      .then(r=>r.json()).then(data=>{
+        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> '+data.tip;
+      }).catch(()=>{
+        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> Take a deep breath and remember you are enough!';
+      });
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
 </body>
 </html>

@@ -6,6 +6,46 @@
   <title>Fidget & Puzzles - Mindcare</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    body {
+      background: #181b2a;
+      overflow-x: hidden;
+    }
+    #lavaLamp {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: transparent;
+    }
+    .bubble-letter {
+      display: inline-block;
+      font-family: 'Comic Sans MS', 'Baloo 2', 'Segoe UI', Arial, sans-serif;
+      font-size: 2.2em;
+      color: #a8edea;
+      text-shadow: 0 2px 12px #43cea2, 0 0 0 #fff;
+      filter: drop-shadow(0 0 8px #43cea2);
+      animation: bubblePop 2.5s infinite alternate;
+      border-radius: 12px;
+      padding: 0 2px;
+      margin: 0 1px;
+    }
+    @keyframes bubblePop {
+      0% { transform: translateY(0) scale(1); }
+      60% { transform: translateY(-8px) scale(1.08); }
+      100% { transform: translateY(0) scale(1); }
+    }
+    .container {
+      position: relative;
+      z-index: 2;
+      background: rgba(35,41,70,0.92);
+      border-radius: 20px;
+      box-shadow: 0 6px 32px #23294655;
+      padding: 36px 28px 24px 28px;
+      margin-top: 40px;
+      width: 92vw;
+      max-width: 420px;
+      text-align: center;
+    }
     #particles {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -39,21 +79,23 @@
   </style>
 </head>
 <body>
+  <canvas id="lavaLamp"></canvas>
   <!-- Immersive Floating Shapes -->
   <div class="floating-shape" style="top:12%;left:8%;width:60px;height:60px;background:radial-gradient(circle,#fed6e3 60%,#fff0 100%);"></div>
   <div class="floating-shape" style="top:70%;left:80%;width:44px;height:44px;background:radial-gradient(circle,#a8edea 60%,#fff0 100%);"></div>
   <div class="floating-shape" style="top:40%;left:60%;width:36px;height:36px;background:radial-gradient(circle,#b8c0ff 60%,#fff0 100%);"></div>
   <div class="container">
-    <h1>Daily Jigsaw Puzzles</h1>
+    <h1 id="bubbleTitle"></h1>
     <div class="tabs">
       <a class="tab" href="index.html">Home</a>
       <a class="tab" href="soothing.html">Soothing Sounds</a>
       <a class="tab active" href="#">Puzzles</a>
     </div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
-      <b>Welcome to your puzzle space.</b> Enjoy a new set of relaxing jigsaw puzzles every day. Choose your challenge and take your time—there's no rush!
+    <div style="margin:18px 0 0 0; font-size:1.15em; color:#43cea2; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
+      <b>Welcome to your puzzle & fidget space!</b> Play, relax, and have fun. This page is made for everyone 8 and up—easy, colorful, and safe.
     </div>
-    <div style="margin:18px 0 0 0; font-size:1.08em; color:#4a4a4a; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
+    <div id="mentalTip" style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;"></div>
+    <div style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#f7f7ff; border-radius:8px; padding:10px 16px;">
       <b>Affirmation of the Moment:</b>
       <span id="affirmationText" style="display:block;margin:8px 0 0 0;"></span>
       <button id="newAffirmationBtn" style="margin-top:8px; background:#5e60ce; color:#fff; border:none; border-radius:6px; padding:6px 18px; font-size:1em; cursor:pointer;">Show Another</button>
@@ -81,24 +123,68 @@
       <div id="puzzleArea" style="margin-top:16px;"></div>
     </div>
   </div>
-  <script src="script.js"></script>
   <script>
-    // Animated background particles
-    const canvas = document.getElementById('particles');
+    // Bubble Lava Lamp Background
+    const canvas = document.getElementById('lavaLamp');
     const ctx = canvas.getContext('2d');
+    let W = window.innerWidth, H = window.innerHeight;
+    canvas.width = W; canvas.height = H;
+    let bubbles = Array.from({length: 18}, () => ({
+      x: Math.random()*W, y: H+Math.random()*H/2, r: 32+Math.random()*48, dx: (Math.random()-0.5)*0.3, dy: -0.3-Math.random()*0.4, c: `rgba(${120+Math.random()*100},${180+Math.random()*60},${200+Math.random()*55},0.22)`
+    }));
+    function drawBubbles() {
+      ctx.clearRect(0,0,W,H);
+      for(const b of bubbles) {
+        ctx.beginPath();
+        ctx.arc(b.x,b.y,b.r,0,2*Math.PI);
+        ctx.fillStyle = b.c;
+        ctx.shadowColor = b.c;
+        ctx.shadowBlur = 24;
+        ctx.fill();
+        b.x += b.dx; b.y += b.dy;
+        if(b.y+b.r<0) { b.y = H+b.r; b.x = Math.random()*W; }
+        if(b.x<0||b.x>W) b.dx*=-1;
+      }
+      requestAnimationFrame(drawBubbles);
+    }
+    drawBubbles();
+    window.onresize = ()=>{W=window.innerWidth;H=window.innerHeight;canvas.width=W;canvas.height=H;};
+
+    // Bubble Letters Title
+    const title = 'Mindcare Fidget & Puzzles';
+    const bubbleTitle = document.getElementById('bubbleTitle');
+    bubbleTitle.innerHTML = '';
+    for(let i=0;i<title.length;i++) {
+      const span = document.createElement('span');
+      span.className = 'bubble-letter';
+      span.innerText = title[i] === ' ' ? '\u00A0' : title[i];
+      span.style.animationDelay = (i*0.08)+'s';
+      bubbleTitle.appendChild(span);
+    }
+
+    // Mental Health Tip API (mentalhealthapi.vercel.app)
+    fetch('https://mentalhealthapi.vercel.app/api/tip')
+      .then(r=>r.json()).then(data=>{
+        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> '+data.tip;
+      }).catch(()=>{
+        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> Take a deep breath and remember you are enough!';
+      });
+    // Animated background particles
+    const particlesCanvas = document.getElementById('particles');
+    const particlesCtx = particlesCanvas.getContext('2d');
     let w = window.innerWidth, h = window.innerHeight;
-    canvas.width = w; canvas.height = h;
+    particlesCanvas.width = w; particlesCanvas.height = h;
     let particles = Array.from({length: 32}, () => ({
       x: Math.random()*w, y: Math.random()*h, r: Math.random()*2+1, dx: (Math.random()-0.5)*0.3, dy: (Math.random()-0.5)*0.3
     }));
     function drawParticles() {
-      ctx.clearRect(0,0,w,h);
-      ctx.globalAlpha = 0.5;
+      particlesCtx.clearRect(0,0,w,h);
+      particlesCtx.globalAlpha = 0.5;
       for(const p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
-        ctx.fillStyle = '#a8edea';
-        ctx.fill();
+        particlesCtx.beginPath();
+        particlesCtx.arc(p.x,p.y,p.r,0,2*Math.PI);
+        particlesCtx.fillStyle = '#a8edea';
+        particlesCtx.fill();
         p.x += p.dx; p.y += p.dy;
         if(p.x<0||p.x>w) p.dx*=-1;
         if(p.y<0||p.y>h) p.dy*=-1;
@@ -106,7 +192,7 @@
       requestAnimationFrame(drawParticles);
     }
     drawParticles();
-    window.onresize = ()=>{w=window.innerWidth;h=window.innerHeight;canvas.width=w;canvas.height=h;};
+    window.onresize = ()=>{w=window.innerWidth;h=window.innerHeight;particlesCanvas.width=w;particlesCanvas.height=h;};
     // Affirmations
     const affirmations = [
       "You are enough, just as you are.",
@@ -236,6 +322,7 @@
     };
     // ...existing code for affirmations, breathing, gratitude...
   </script>
+  <script src="script.js"></script>
   <style>
     @keyframes bounce {
       0% { transform: translateY(0); }

@@ -544,6 +544,97 @@ function setupBreathingCircle() {
   breathModal.querySelector('div')?.prepend(circle);
 }
 
+// --- UI Variety: Randomize Floating Shape Colors ---
+function randomizeFloatingShapes() {
+  const colors = [
+    'radial-gradient(circle,#fed6e3 60%,#fff0 100%)',
+    'radial-gradient(circle,#a8edea 60%,#fff0 100%)',
+    'radial-gradient(circle,#b8c0ff 60%,#fff0 100%)',
+    'radial-gradient(circle,#43cea2 60%,#fff0 100%)',
+    'radial-gradient(circle,#e0c3fc 60%,#fff0 100%)'
+  ];
+  document.querySelectorAll('.floating-shape').forEach(shape => {
+    shape.style.background = colors[Math.floor(Math.random()*colors.length)];
+    shape.style.width = (36 + Math.random()*40) + 'px';
+    shape.style.height = (36 + Math.random()*40) + 'px';
+    shape.style.top = (5 + Math.random()*80) + '%';
+    shape.style.left = (5 + Math.random()*80) + '%';
+  });
+}
+
+// --- UI Variety: Gentle Confetti on Affirmation ---
+function gentleConfetti() {
+  const container = document.body;
+  for(let i=0;i<18;i++) {
+    const conf = document.createElement('div');
+    conf.style.position = 'fixed';
+    conf.style.left = (Math.random()*100)+'vw';
+    conf.style.top = (Math.random()*60)+'vh';
+    conf.style.width = '8px';
+    conf.style.height = '8px';
+    conf.style.borderRadius = '50%';
+    conf.style.background = ['#43cea2','#a8edea','#fed6e3','#b8c0ff','#e0c3fc'][Math.floor(Math.random()*5)];
+    conf.style.opacity = '0.7';
+    conf.style.zIndex = 9999;
+    conf.style.pointerEvents = 'none';
+    conf.style.transition = 'all 1.2s ease';
+    container.appendChild(conf);
+    setTimeout(()=>{
+      conf.style.top = (80+Math.random()*10)+'vh';
+      conf.style.opacity = '0';
+    }, 50);
+    setTimeout(()=>container.removeChild(conf), 1400);
+  }
+}
+// Patch affirmation button to trigger confetti
+function patchAffirmationConfetti() {
+  const btn = document.getElementById('newAffirmationBtn');
+  if (btn) {
+    btn.addEventListener('click', gentleConfetti);
+  }
+}
+
+// --- UI Variety: Animated Tab Underline ---
+function animateTabUnderline() {
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('mouseenter', function() {
+      this.style.boxShadow = '0 4px 0 0 #43cea2';
+    });
+    tab.addEventListener('mouseleave', function() {
+      this.style.boxShadow = '';
+    });
+  });
+}
+
+// --- Lava Lamp Bubble Background (from fidget.html) ---
+function setupLavaLamp() {
+  const canvas = document.getElementById('lavaLamp');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W = window.innerWidth, H = window.innerHeight;
+  canvas.width = W; canvas.height = H;
+  let bubbles = Array.from({length: 18}, () => ({
+    x: Math.random()*W, y: H+Math.random()*H/2, r: 32+Math.random()*48, dx: (Math.random()-0.5)*0.3, dy: -0.3-Math.random()*0.4, c: `rgba(${120+Math.random()*100},${180+Math.random()*60},${200+Math.random()*55},0.22)`
+  }));
+  function drawBubbles() {
+    ctx.clearRect(0,0,W,H);
+    for(const b of bubbles) {
+      ctx.beginPath();
+      ctx.arc(b.x,b.y,b.r,0,2*Math.PI);
+      ctx.fillStyle = b.c;
+      ctx.shadowColor = b.c;
+      ctx.shadowBlur = 24;
+      ctx.fill();
+      b.x += b.dx; b.y += b.dy;
+      if(b.y+b.r<0) { b.y = H+b.r; b.x = Math.random()*W; }
+      if(b.x<0||b.x>W) b.dx*=-1;
+    }
+    requestAnimationFrame(drawBubbles);
+  }
+  drawBubbles();
+  window.addEventListener('resize', ()=>{W=window.innerWidth;H=window.innerHeight;canvas.width=W;canvas.height=H;});
+}
+
 // --- DOMContentLoaded: Setup all features ---
 document.addEventListener('DOMContentLoaded', function() {
   setupParticles();
@@ -562,4 +653,8 @@ document.addEventListener('DOMContentLoaded', function() {
   setupFreeQuote();
   setupAccessibilityToggles();
   setupBreathingCircle();
+  randomizeFloatingShapes();
+  patchAffirmationConfetti();
+  animateTabUnderline();
+  setupLavaLamp();
 });
