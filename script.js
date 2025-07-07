@@ -307,6 +307,39 @@ function setupMindMateChat() {
   const chatInput = document.getElementById('chatInput');
   const typingIndicator = document.getElementById('typingIndicator');
   if (!chatWindow || !chatForm || !chatInput || !typingIndicator) return;
+  // --- Gemini API UI ---
+  let geminiEnabled = false;
+  let geminiKey = localStorage.getItem('mindcareGeminiKey') || '';
+  // Add Gemini toggle and key input UI
+  const geminiSection = document.createElement('div');
+  geminiSection.style.margin = '12px 0 0 0';
+  geminiSection.innerHTML = `
+    <label style="font-size:0.98em;color:#43cea2;">
+      <input type="checkbox" id="geminiToggle" ${geminiKey ? 'checked' : ''} style="margin-right:6px;"> Use Gemini AI (optional)
+    </label>
+    <input type="password" id="geminiKeyInput" placeholder="Gemini API Key" value="${geminiKey}" style="margin-left:8px;width:180px;border-radius:6px;padding:4px 8px;font-size:0.98em;">
+    <span id="geminiStatus" style="margin-left:8px;font-size:0.95em;color:#5e60ce;"></span>
+  `;
+  chatForm.parentNode.insertBefore(geminiSection, chatForm.nextSibling);
+  const geminiToggle = document.getElementById('geminiToggle');
+  const geminiKeyInput = document.getElementById('geminiKeyInput');
+  const geminiStatus = document.getElementById('geminiStatus');
+  geminiEnabled = geminiToggle.checked;
+  geminiToggle.onchange = function() {
+    geminiEnabled = this.checked;
+    if (!geminiEnabled) geminiStatus.innerText = '';
+  };
+  geminiKeyInput.onchange = function() {
+    geminiKey = this.value.trim();
+    if (geminiKey) {
+      localStorage.setItem('mindcareGeminiKey', geminiKey);
+      geminiStatus.innerText = 'Key saved!';
+    } else {
+      localStorage.removeItem('mindcareGeminiKey');
+      geminiStatus.innerText = '';
+    }
+  };
+  // Supportive responses
   const supportiveResponses = [
     "Hello, I'm here for you.",
     "I hear you. Your feelings are valid.",
@@ -393,7 +426,7 @@ function setupMindMateChat() {
   if(chatWindow.childElementCount === 0) {
     addChatBubble("Hi, I'm MindMate. How are you feeling today?", 'ai');
   }
-  chatForm.onsubmit = function(e) {
+  chatForm.onsubmit = async function(e) {
     e.preventDefault();
     const userMsg = chatInput.value.trim();
     if(!userMsg) return;
@@ -401,6 +434,14 @@ function setupMindMateChat() {
     chatInput.value = '';
     typingIndicator.style.display = 'block';
     chatWindow.scrollTop = chatWindow.scrollHeight;
+    // --- Gemini API logic ---
+    if (geminiEnabled && geminiKey) {
+      const prompt = userMsg;
+      const reply = await callGeminiAPI(prompt, geminiKey);
+      typingIndicator.style.display = 'none';
+      addChatBubble(reply, 'ai');
+      return;
+    }
     setTimeout(()=>{
       typingIndicator.style.display = 'none';
       // Check for keywords for solutions
@@ -634,6 +675,34 @@ function setupLavaLamp() {
   drawBubbles();
   window.addEventListener('resize', ()=>{W=window.innerWidth;H=window.innerHeight;canvas.width=W;canvas.height=H;});
 }
+
+// --- Gemini API Integration ---
+async function callGeminiAPI(prompt, apiKey) {
+  // Gemini Pro endpoint (text-only)
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + encodeURIComponent(apiKey);
+  const body = {
+    contents: [{ parts: [{ text: prompt }] }]
+  };
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    const data = await response.json();
+    if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
+      return data.candidates[0].content.parts.map(p => p.text).join(' ');
+    } else if (data && data.error) {
+      return 'Gemini API error: ' + data.error.message;
+    } else {
+      return 'No response from Gemini API.';
+    }
+  } catch (e) {
+    return 'Gemini API call failed: ' + e.message;
+  }
+}
+// Example usage:
+// const geminiReply = await callGeminiAPI('Say hello!', 'YOUR_GEMINI_API_KEY');
 
 // --- DOMContentLoaded: Setup all features ---
 document.addEventListener('DOMContentLoaded', function() {
