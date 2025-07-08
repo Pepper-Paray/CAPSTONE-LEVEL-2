@@ -307,38 +307,6 @@ function setupMindMateChat() {
   const chatInput = document.getElementById('chatInput');
   const typingIndicator = document.getElementById('typingIndicator');
   if (!chatWindow || !chatForm || !chatInput || !typingIndicator) return;
-  // --- Gemini API UI ---
-  let geminiEnabled = false;
-  let geminiKey = localStorage.getItem('mindcareGeminiKey') || '';
-  // Add Gemini toggle and key input UI
-  const geminiSection = document.createElement('div');
-  geminiSection.style.margin = '12px 0 0 0';
-  geminiSection.innerHTML = `
-    <label style="font-size:0.98em;color:#43cea2;">
-      <input type="checkbox" id="geminiToggle" ${geminiKey ? 'checked' : ''} style="margin-right:6px;"> Use Gemini AI (optional)
-    </label>
-    <input type="password" id="geminiKeyInput" placeholder="Gemini API Key" value="${geminiKey}" style="margin-left:8px;width:180px;border-radius:6px;padding:4px 8px;font-size:0.98em;">
-    <span id="geminiStatus" style="margin-left:8px;font-size:0.95em;color:#5e60ce;"></span>
-  `;
-  chatForm.parentNode.insertBefore(geminiSection, chatForm.nextSibling);
-  const geminiToggle = document.getElementById('geminiToggle');
-  const geminiKeyInput = document.getElementById('geminiKeyInput');
-  const geminiStatus = document.getElementById('geminiStatus');
-  geminiEnabled = geminiToggle.checked;
-  geminiToggle.onchange = function() {
-    geminiEnabled = this.checked;
-    if (!geminiEnabled) geminiStatus.innerText = '';
-  };
-  geminiKeyInput.onchange = function() {
-    geminiKey = this.value.trim();
-    if (geminiKey) {
-      localStorage.setItem('mindcareGeminiKey', geminiKey);
-      geminiStatus.innerText = 'Key saved!';
-    } else {
-      localStorage.removeItem('mindcareGeminiKey');
-      geminiStatus.innerText = '';
-    }
-  };
   // Supportive responses
   const supportiveResponses = [
     "Hello, I'm here for you.",
@@ -434,14 +402,6 @@ function setupMindMateChat() {
     chatInput.value = '';
     typingIndicator.style.display = 'block';
     chatWindow.scrollTop = chatWindow.scrollHeight;
-    // --- Gemini API logic ---
-    if (geminiEnabled && geminiKey) {
-      const prompt = userMsg;
-      const reply = await callGeminiAPI(prompt, geminiKey);
-      typingIndicator.style.display = 'none';
-      addChatBubble(reply, 'ai');
-      return;
-    }
     setTimeout(()=>{
       typingIndicator.style.display = 'none';
       // Check for keywords for solutions
@@ -676,34 +636,6 @@ function setupLavaLamp() {
   window.addEventListener('resize', ()=>{W=window.innerWidth;H=window.innerHeight;canvas.width=W;canvas.height=H;});
 }
 
-// --- Gemini API Integration ---
-async function callGeminiAPI(prompt, apiKey) {
-  // Gemini Pro endpoint (text-only)
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + encodeURIComponent(apiKey);
-  const body = {
-    contents: [{ parts: [{ text: prompt }] }]
-  };
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    const data = await response.json();
-    if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
-      return data.candidates[0].content.parts.map(p => p.text).join(' ');
-    } else if (data && data.error) {
-      return 'Gemini API error: ' + data.error.message;
-    } else {
-      return 'No response from Gemini API.';
-    }
-  } catch (e) {
-    return 'Gemini API call failed: ' + e.message;
-  }
-}
-// Example usage:
-// const geminiReply = await callGeminiAPI('Say hello!', 'YOUR_GEMINI_API_KEY');
-
 // --- DOMContentLoaded: Setup all features ---
 document.addEventListener('DOMContentLoaded', function() {
   setupParticles();
@@ -726,4 +658,132 @@ document.addEventListener('DOMContentLoaded', function() {
   patchAffirmationConfetti();
   animateTabUnderline();
   setupLavaLamp();
+  setupJournalingPrompts();
+  setupPublicQuoteDemo();
 });
+
+// --- Journaling Prompts ---
+function setupJournalingPrompts() {
+  // Add a simple journaling prompt modal if not present
+  if (document.getElementById('journalPromptModal')) return;
+  const modal = document.createElement('div');
+  modal.id = 'journalPromptModal';
+  modal.style = 'display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(168,237,234,0.85);z-index:10000;align-items:center;justify-content:center;';
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:16px;padding:32px 24px;box-shadow:0 4px 24px rgba(94,96,206,0.13);text-align:center;max-width:340px;margin:auto;">
+      <h2 style="color:#5e60ce;">Journaling Prompt</h2>
+      <div id="journalPromptText" style="margin:12px 0 18px 0;font-size:1.08em;color:#43cea2;"></div>
+      <textarea id="journalPromptInput" rows="4" style="width:90%;border-radius:8px;padding:8px;"></textarea>
+      <div id="journalPromptMsg" style="margin:8px 0 0 0;color:#43cea2;"></div>
+      <button onclick="document.getElementById('journalPromptModal').style.display='none'" style="background:#5e60ce;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1em;cursor:pointer;">Close</button>
+      <button id="saveJournalPromptBtn" style="background:#43cea2;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1em;cursor:pointer;margin-left:8px;">Save</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  // Button to open prompt
+  const btn = document.createElement('button');
+  btn.innerText = 'Journaling Prompt';
+  btn.className = 'dark';
+  btn.style = 'position:fixed;bottom:18px;right:18px;z-index:9999;';
+  btn.onclick = function() {
+    showJournalingPrompt();
+  };
+  document.body.appendChild(btn);
+  // Save logic
+  document.getElementById('saveJournalPromptBtn').onclick = function() {
+    const val = document.getElementById('journalPromptInput').value.trim();
+    if(val.length>0) {
+      document.getElementById('journalPromptMsg').innerText = 'Saved! Thank you for reflecting.';
+    } else {
+      document.getElementById('journalPromptMsg').innerText = 'Please write your thoughts.';
+    }
+  };
+}
+const journalingPrompts = [
+  "What is one thing you are grateful for today?",
+  "Describe a moment you felt calm recently.",
+  "What is something you are looking forward to?",
+  "Write about a challenge you overcame.",
+  "How are you feeling right now?",
+  "What helps you feel safe?",
+  "What is a small act of kindness you can do for yourself?",
+  "Describe a place where you feel at peace.",
+  "What is something you want to let go of?",
+  "What is a hope you have for tomorrow?"
+];
+function showJournalingPrompt() {
+  const modal = document.getElementById('journalPromptModal');
+  const prompt = journalingPrompts[Math.floor(Math.random()*journalingPrompts.length)];
+  document.getElementById('journalPromptText').innerText = prompt;
+  document.getElementById('journalPromptInput').value = '';
+  document.getElementById('journalPromptMsg').innerText = '';
+  modal.style.display = 'flex';
+}
+
+// --- Public API Demo: Render ZenQuotes to DOM with Tailwind, JS Fundamentals ---
+function setupPublicQuoteDemo() {
+  // Remove any existing demo
+  if (document.getElementById('publicQuoteDemo')) return;
+  // Create container
+  const container = document.createElement('div');
+  container.id = 'publicQuoteDemo';
+  container.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 w-[95vw] max-w-md bg-white dark:bg-[#232946] rounded-xl shadow-lg p-4 z-[9998] flex flex-col items-center';
+  // Title
+  const title = document.createElement('h2');
+  title.className = 'text-lg font-bold text-[#5e60ce] mb-2';
+  title.innerText = 'Get a Motivational Quote';
+  container.appendChild(title);
+  // Calming image
+  const img = document.createElement('img');
+  img.alt = 'Calming inspiration';
+  img.className = 'rounded-lg mb-3 w-full max-h-48 object-cover border border-[#a8edea]';
+  img.style.background = '#e0f7fa';
+  img.src = 'https://source.unsplash.com/featured/400x200/?calm,nature,wellness,soothing';
+  container.appendChild(img);
+  // Button
+  const btn = document.createElement('button');
+  btn.className = 'bg-[#43cea2] hover:bg-[#5e60ce] text-white font-semibold py-2 px-6 rounded-lg mb-3 transition-colors';
+  btn.innerText = 'Show Quote';
+  container.appendChild(btn);
+  // Quote display
+  const quoteBox = document.createElement('div');
+  quoteBox.className = 'text-base text-[#232946] dark:text-[#a8edea] text-center min-h-[48px] mb-1';
+  container.appendChild(quoteBox);
+  // Array of objects for local fallback
+  const fallbackQuotes = [
+    {q: "You are enough, just as you are.", a: "Unknown"},
+    {q: "Every step forward, no matter how small, is progress.", a: "Unknown"},
+    {q: "You are stronger than you think.", a: "Unknown"},
+    {q: "It's okay to rest. Healing is not a race.", a: "Unknown"},
+    {q: "You are not alone. You matter.", a: "Unknown"}
+  ];
+  // Custom function to fetch and render quote and image
+  async function fetchAndRenderQuote() {
+    quoteBox.innerText = 'Loading...';
+    // Fetch new calming image
+    img.src = 'https://source.unsplash.com/featured/400x200/?calm,nature,wellness,soothing,' + Date.now();
+    img.onerror = function() {
+      img.src = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80'; // fallback
+    };
+    try {
+      const res = await fetch('https://zenquotes.io/api/random');
+      const data = await res.json();
+      if (Array.isArray(data) && data[0] && data[0].q && data[0].a) {
+        quoteBox.innerHTML = `“${data[0].q}”<br><span class='text-[#43cea2] text-sm'>– ${data[0].a}</span>`;
+      } else {
+        throw new Error('No quote');
+      }
+    } catch {
+      // Fallback: pick a random from array
+      const idx = Math.floor(Math.random()*fallbackQuotes.length);
+      const q = fallbackQuotes[idx];
+      quoteBox.innerHTML = `“${q.q}”<br><span class='text-[#43cea2] text-sm'>– ${q.a}</span>`;
+    }
+  }
+  // Button event
+  btn.onclick = fetchAndRenderQuote;
+  // Render initial fallback quote and image
+  fetchAndRenderQuote();
+  // Add to DOM
+  document.body.appendChild(container);
+}

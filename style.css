@@ -1,7 +1,10 @@
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-  background-size: 200% 200%;
+  background:
+    linear-gradient(120deg, #a8edea 0%, #fed6e3 100%),
+    url('https://source.unsplash.com/1920x1080/?calm,nature,wellness,soothing') center center/cover no-repeat;
+  background-blend-mode: lighten;
+  background-size: cover, 200% 200%;
   animation: bg-move 12s ease-in-out infinite alternate;
   margin: 0;
   padding: 0;
