@@ -8,6 +8,12 @@
   <meta name="theme-color" content="#232946" />
   <link rel="stylesheet" href="style.css" />
   <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="index" href="index.html" title="Mindcare Home" />
+  <link rel="html" type="login.html" href="login.html" />
+  <link rel="html" type="signup.html" href="signup.html" />
+  <link rel="html" type="soothing.html" href="soothing.html" />
+  <link rel="html" type="puzzles.html" href="puzzles.html"/>
+  
 </head>
 <body class="dark" data-theme="dark">
   <canvas id="lavaLamp"></canvas>
@@ -53,32 +59,6 @@
     </div>
   </div>
   <script src="script.js"></script>
-  <script>
-    // Bubble Letters Title
-    const title = 'Mindcare Sign Up';
-    const bubbleTitle = document.getElementById('bubbleTitle');
-    if (bubbleTitle) {
-      bubbleTitle.innerHTML = '';
-      for(let i=0;i<title.length;i++) {
-        const span = document.createElement('span');
-        span.className = 'bubble-letter';
-        span.innerText = title[i] === ' ' ? '\u00A0' : title[i];
-        span.style.animationDelay = (i*0.08)+'s';
-        bubbleTitle.appendChild(span);
-      }
-    }
-    // Mental Health Tip API
-    fetch('https://mentalhealthapi.vercel.app/api/tip')
-      .then(r=>r.json()).then(data=>{
-        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> '+data.tip;
-      }).catch(()=>{
-        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> Take a deep breath and remember you are enough!';
-      });
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('service-worker.js');
-      });
-    }
-  </script>
+ 
 </body>
 </html>

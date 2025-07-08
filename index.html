@@ -1,106 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Mindcare</title>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#232946" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
 </head>
-<body class="dark" data-theme="dark">
-  <canvas id="lavaLamp"></canvas>
-  <!-- Immersive Floating Shapes -->
-  <div class="floating-shape"></div>
-  <div class="floating-shape"></div>
-  <div class="floating-shape"></div>
-  <div class="container dark">
-    <h1 id="bubbleTitle"></h1>
-    <div id="mentalTip" class="dark" style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;"></div>
-    <div class="tabs dark">
-      <a class="tab active dark" href="#">Home</a>
-      <a class="tab dark" href="soothing.html">Soothing Sounds</a>
-      <a class="tab dark" href="puzzles.html">Puzzles</a>
-    </div>
-    <div id="motivation" class="dark"></div>
-    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
-      <b class="dark">Welcome, friend.</b> This is a safe space for you to be yourself. Whether you’re feeling anxious, overwhelmed, joyful, or numb, you are seen and valued here. MindMate is here to listen, support, and encourage you—no judgment, just care.
-    </div>
-    <div class="dark" style="margin:18px 0 0 0; font-size:1em; border-radius:8px; padding:10px 16px;">
-      <b class="dark">Quick Help & Resources:</b>
-      <ul style="text-align:left; margin:8px 0 0 0; padding-left:18px;">
-        <li><a href="https://www.crisistextline.org/" target="_blank">Crisis Text Line</a> (Text HOME to 741741)</li>
-        <li><a href="https://www.nami.org/Home" target="_blank">NAMI</a> (Mental Health Support)</li>
-        <li><a href="https://www.adhdfoundation.org.uk/" target="_blank">ADHD Foundation</a></li>
-        <li><a href="https://www.ptsd.va.gov/" target="_blank">PTSD Resources</a></li>
-      </ul>
-      <span style="font-size:0.95em;">If you need urgent help, please reach out to a trusted person or professional.</span>
-    </div>
-    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
-      <b class="dark">Affirmation of the Moment:</b>
-      <span id="affirmationText" style="display:block;margin:8px 0 0 0;"></span>
-      <button id="newAffirmationBtn" class="dark" style="margin-top:8px;">Show Another</button>
-    </div>
-    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
-      <b class="dark">Need a Breather?</b>
-      <button id="breathBtn" class="dark" style="margin-left:8px;">Start Breathing Exercise</button>
-    </div>
-    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
-      <b class="dark">How are you feeling today?</b>
-      <input id="moodInput" type="text" placeholder="Type a word or phrase..." class="dark" />
-      <button id="moodSaveBtn" class="dark">Save</button>
-      <span id="moodSavedMsg"></span>
-    </div>
-    <div id="freeQuote" class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;"></div>
-    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#181b2a; color:#a8edea;">
-      <b class="dark">MindMate AI</b><br>
-      <span style="font-size:1em; color:#43cea2;">MindMate is always here to listen and support you with caring, trauma-informed responses. No key needed—just type and connect.</span>
-    </div>
-    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;">
-      <b class="dark">🌈 Accessibility & Variety</b><br>
-      <span style="font-size:1em; color:#43cea2;">Toggle dyslexia font or high-contrast mode at the bottom left. Enjoy animated breathing, floating shapes, and a calming, responsive design for all devices.</span>
+
+<body>
+  <h1>Welcome to Mindcare</h1>
+  <p>Your mental health matters. Let's take care of it together.</p>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="soothing.html">Soothing Sounds</a></li>
+      <li><a href="puzzles.html">Puzzles</a></li>
+    </ul>
+  </nav>
+  <section>
+    <h2>About Mindcare</h2>
+    <p>Mindcare is a safe space for you to explore your mental health. We provide resources, tools, and a supportive
+      community to help you on your journey.</p>
+    <h3>Features</h3>
+    <ul>
+      <li>Soothing sounds to help you relax</li>
+      <li>Puzzles and games to engage your mind</li>
+      <li>Daily mental health tips and quotes</li>
+      <li>AI-powered support with MindMate</li>
+      <li>Accessibility options for dyslexia and high contrast</li>
+    </ul>
+    <h3>Get Started</h3>
+    <p>To begin, you can sign up for an account or log in if you
+      already have one. Explore the soothing sounds, puzzles, and daily tips to enhance your mental well-being.</p>
+    <p>Remember, you are not alone. Mindcare is here to support you every step of the way.</p>
+  </section>
+   <div id="app">
+    <div id="chat-window"></div>
+    <div class="input-container">
+      <input type="text" id="user-input" placeholder="Type how you're feeling..." />
+      <button onclick="handleUserInput()">Send</button>
     </div>
   </div>
-  <div id="mindmateChat" class="dark" style="margin:32px 0 0 0; border-radius:16px; box-shadow:0 4px 24px #23294699; padding:0 0 18px 0; max-width:480px; margin-left:auto; margin-right:auto;">
-    <div style="display:flex;align-items:center;gap:12px;padding:18px 18px 0 18px;">
-      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="MindMate avatar" style="width:48px;height:48px;border-radius:50%;background:#232946;box-shadow:0 2px 8px #a8edea44;" />
-      <div style="font-size:1.25em; font-weight:600; color:#a8edea;">MindMate</div>
-    </div>
-    <div id="chatWindow" class="dark" style="max-height:260px;overflow-y:auto;padding:12px 18px 0 18px;"></div>
-    <form id="chatForm" style="display:flex;gap:8px;align-items:center;padding:0 18px 0 18px;margin-top:8px;" autocomplete="off">
-      <input id="chatInput" type="text" placeholder="Type your thoughts or feelings..." aria-label="Type your message to MindMate" class="dark" required />
-      <button type="submit" class="dark">Send</button>
-    </form>
-    <div id="typingIndicator" class="dark" style="padding:0 18px;font-size:0.98em;display:none;">MindMate is typing...</div>
-  </div>
-  <script src="script.js"></script>
-  <script>
-    // Bubble Letters Title
-    const title = 'Mindcare Home';
-    const bubbleTitle = document.getElementById('bubbleTitle');
-    if (bubbleTitle) {
-      bubbleTitle.innerHTML = '';
-      for(let i=0;i<title.length;i++) {
-        const span = document.createElement('span');
-        span.className = 'bubble-letter';
-        span.innerText = title[i] === ' ' ? '\u00A0' : title[i];
-        span.style.animationDelay = (i*0.08)+'s';
-        bubbleTitle.appendChild(span);
-      }
-    }
-    // Mental Health Tip API
-    fetch('https://mentalhealthapi.vercel.app/api/tip')
-      .then(r=>r.json()).then(data=>{
-        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> '+data.tip;
-      }).catch(()=>{
-        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> Take a deep breath and remember you are enough!';
-      });
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('service-worker.js');
-      });
-    }
-  </script>
+    <link rel="script" href="script.js">
+    <footer>
+      <p>&copy; 2025 Mind-care. All rights reserved.</p>
+    </footer>
 </body>
+
 </html>

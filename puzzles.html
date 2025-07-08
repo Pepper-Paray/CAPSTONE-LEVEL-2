@@ -128,11 +128,17 @@
       const puzzle = dailyPuzzles[idx];
       area.innerHTML = `<iframe src="https://www.jspuzzles.com/?puzzle=${encodeURIComponent(puzzle.url)}&pieces=${puzzle.pieces}" width="100%" height="480" style="border:none;border-radius:12px;box-shadow:0 2px 12px #5e60ce22;"></iframe><div style='margin-top:8px;font-size:1em;color:#5e60ce;'>${puzzle.title}</div>`;
     };
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('service-worker.js');
-      });
-    }
+    // Daily Affirmation Logic
+    const affirmations = [
+      "You are enough just as you are.",
+      "Your feelings are valid and important.",
+      "You have the strength to overcome any challenge.",
+      "Every day is a new opportunity for growth.",
+      "You are worthy of love and respect.",
+      "Your mental health matters, take care of it.",
+      "You are not alone in your struggles.",
+      "Believe in yourself and your abilities."
+    ];
   </script>
 </body>
 </html>
