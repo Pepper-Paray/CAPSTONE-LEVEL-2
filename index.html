@@ -3,55 +3,32 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Mindcare</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindCare Support Chat</title>
+
   <link rel="stylesheet" href="style.css" />
+  <nav>
+    <a href="mindmate.html">Open MindMate</a>
+  </nav>
+
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
 </head>
 
-<body>
-  <h1>Welcome to Mindcare</h1>
-  <p>Your mental health matters. Let's take care of it together.</p>
-  <p>I care about <span id="user-concern"></span></p>
-  <div><input type="text" id="user-input" placeholder="Type your concern..." /></div>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="signup.html">Sign Up</a></li>
-      <li><a href="login.html">Login</a></li>
-      <li><a href="soothing.html">Soothing Sounds</a></li>
-      <li><a href="puzzles.html">Puzzles</a></li>
-    </ul>
-  </nav>
-  <section>
-    <h2>About Mindcare</h2>
-    <p>Mindcare is a safe space for you to explore your mental health. We provide resources, tools, and a supportive
-      community to help you on your journey.No matter what you do there is someone out there that cares for you
-    </p>
-    <h3>Features</h3>
-    <ul>
-      <li>Soothing sounds to help you relax</li>
-      <li>Puzzles and games to engage your mind</li>
-      <li>Daily mental health tips and quotes</li>
-      <li>AI-powered support with MindMate</li>
-      <li>Accessibility options for dyslexia and high contrast</li>
-    </ul>
-    <h3>Get Started</h3>
-    <p>To begin, you can sign up for an account or log in if you
-      already have one. Explore the soothing sounds, puzzles, and daily tips to enhance your mental well-being.</p>
-    <p>Remember, you are not alone. Mindcare is here to support you every step of the way.</p>
-  </section>
+<body onload="fetchBackgroundImage()">
   <div id="app">
+    <h2 class="title">Welcome to MindCare</h2>
+    <p class="subtitle">A calming space to express, reflect, and reset.</p>
+
     <div id="chat-window"></div>
+
     <div class="input-container">
-      <input type="text" id="user-input" placeholder="Type how you're feeling..." />
+      <input type="text" id="user-input" placeholder="Tell me how you’re feeling..." autocomplete="off" />
       <button onclick="handleUserInput()">Send</button>
     </div>
   </div>
-  <link rel="script" href="script.js">
-  <footer>
-    <p>&copy; 2025 Mind-care. All rights reserved.</p>
-  </footer>
+  <a href="mindmate.html" target="_blank">Launch MindMate in a new tab</a>
+
+  <script src="script.js"></script>
 </body>
 
 </html>

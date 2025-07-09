@@ -1,13 +1,21 @@
 {
-  "name": "Mindcare",
-  "short_name": "Mindcare",
-  "start_url": "./index.html",
+  "name": "MindCare Chat",
+  "short_name": "MindCare",
+  "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#232946",
-  "theme_color": "#232946",
-  "description": "A trauma-informed, neurodiversity-friendly mental wellness PWA for PTSD, CPTSD, ADHD, dyslexia, anxiety, and more.",
+  "background_color": "#e8f5e9",
+  "theme_color": "#4caf50",
+  "description": "A calm and thoughtful AI space for emotional support, journaling, and mindfulness.",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "icons/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }

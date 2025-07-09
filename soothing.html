@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -9,6 +10,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="apple-touch-icon" href="/icons/icon-192.png" />
 </head>
+
 <body class="dark" data-theme="dark">
   <canvas id="lavaLamp"></canvas>
   <!-- Immersive Floating Shapes -->
@@ -18,19 +20,25 @@
   <canvas id="particles"></canvas>
   <div class="container dark">
     <h1 id="bubbleTitle"></h1>
-    <div id="mentalTip" class="dark" style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;"></div>
+    <div id="mentalTip" class="dark"
+      style="margin:18px 0 0 0; font-size:1.08em; color:#5e60ce; background:#e0f7fa; border-radius:8px; padding:10px 16px;">
+    </div>
     <div class="tabs dark">
       <a class="tab dark" href="index.html">Home</a>
       <a class="tab active dark" href="#">Soothing Sounds</a>
       <a class="tab dark" href="puzzles.html">Puzzles</a>
     </div>
     <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
-      <b class="dark">Therapist Collaboration Mode:</b> <span style="font-size:0.97em;">You can use this page together with your therapist. Share your favorite sounds, affirmations, and breathing exercises in session. Your therapist can guide you to select calming sounds, practice breathing, or reflect on affirmations together. Use the journal to note insights or feelings during therapy.</span>
+      <b class="dark">Therapist Collaboration Mode:</b> <span style="font-size:0.97em;">You can use this page together
+        with your therapist. Share your favorite sounds, affirmations, and breathing exercises in session. Your
+        therapist can guide you to select calming sounds, practice breathing, or reflect on affirmations together. Use
+        the journal to note insights or feelings during therapy.</span>
       <br><button id="exportSessionBtn" class="dark" style="margin-top:10px;">Export Session Notes</button>
       <span id="exportMsg"></span>
     </div>
     <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
-      <b class="dark">Welcome to your calm space.</b> Let these sounds help you relax, focus, or just take a break. You are safe and supported here.
+      <b class="dark">Welcome to your calm space.</b> Let these sounds help you relax, focus, or just take a break. You
+      are safe and supported here.
     </div>
     <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px;">
       <b class="dark">Mood Check-In:</b>
@@ -69,10 +77,14 @@
       </audio>
       <div id="visualizer" class="dark"></div>
     </div>
-    <div id="freeQuote" class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;"></div>
-    <div class="dark" style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;">
+    <div id="freeQuote" class="dark"
+      style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;">
+    </div>
+    <div class="dark"
+      style="margin:18px 0 0 0; font-size:1.08em; border-radius:8px; padding:10px 16px; background:#232946; color:#a8edea;">
       <b class="dark">🌈 Accessibility & Variety</b><br>
-      <span style="font-size:1em; color:#43cea2;">Toggle dyslexia font or high-contrast mode at the bottom left. Enjoy animated breathing, floating shapes, and a calming, responsive design for all devices.</span>
+      <span style="font-size:1em; color:#43cea2;">Toggle dyslexia font or high-contrast mode at the bottom left. Enjoy
+        animated breathing, floating shapes, and a calming, responsive design for all devices.</span>
     </div>
   </div>
   <script src="script.js"></script>
@@ -82,26 +94,27 @@
     const bubbleTitle = document.getElementById('bubbleTitle');
     if (bubbleTitle) {
       bubbleTitle.innerHTML = '';
-      for(let i=0;i<title.length;i++) {
+      for (let i = 0; i < title.length; i++) {
         const span = document.createElement('span');
         span.className = 'bubble-letter';
         span.innerText = title[i] === ' ' ? '\u00A0' : title[i];
-        span.style.animationDelay = (i*0.08)+'s';
+        span.style.animationDelay = (i * 0.08) + 's';
         bubbleTitle.appendChild(span);
       }
     }
     // Mental Health Tip API
     fetch('https://mentalhealthapi.vercel.app/api/tip')
-      .then(r=>r.json()).then(data=>{
-        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> '+data.tip;
-      }).catch(()=>{
+      .then(r => r.json()).then(data => {
+        document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> ' + data.tip;
+      }).catch(() => {
         document.getElementById('mentalTip').innerHTML = '<b>Tip:</b> Take a deep breath and remember you are enough!';
       });
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
+      window.addEventListener('load', function () {
         navigator.serviceWorker.register('service-worker.js');
       });
     }
   </script>
 </body>
+
 </html>
