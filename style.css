@@ -1,9 +1,9 @@
 body {
   margin: 0;
   height: 100vh;
-  display: flex;              /* Flexbox layout */
-  justify-content: center;    /* Center horizontally */
-  align-items: center;        /* Center vertically */
+  display: flex;              
+  justify-content: center;    
+  align-items: center;        
   background: linear-gradient(to bottom, #d4ebf2, #f8f9fc); 
   font-family: 'Segoe UI', sans-serif;
 }
@@ -52,7 +52,7 @@ user {
 
 
 .ai {
-  background-color: #e8f5e9;
+  background-color: #0a2586;
   align-self: flex-start;
 }
 
@@ -82,17 +82,9 @@ button {
   padding: 10px 16px;
   border: none;
   border-radius: 8px;
-  background-color: #4caf50;
-  color: navy;
+  background-color: #0c0653;
+  color: rgb(17, 150, 86);
   font-weight: bold;
   cursor: pointer;
 }
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 0 40px; 
-  box-sizing: border-box;
-  text-align: center;
-}
+
