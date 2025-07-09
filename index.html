@@ -5,12 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MindCare Support Chat</title>
-
   <link rel="stylesheet" href="style.css" />
   <nav>
     <a href="mindmate.html">Open MindMate</a>
   </nav>
-
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
 </head>
 
@@ -18,12 +16,29 @@
   <div id="app">
     <h2 class="title">Welcome to MindCare</h2>
     <p class="subtitle">A calming space to express, reflect, and reset.</p>
+    <p class="description">
+      MindCare is designed to help you manage your mental well-being. Here, you can share your thoughts, feelings, and
+      experiences in a safe and supportive environment.
+      Whether you're looking to vent, seek advice, or simply reflect on your day, MindCare is here for you.
+    <input type="checkbox" name="subscribe" id="subscribe">
+    <label for="subscribe">Subscribe to our newsletter</label>
+    <input type="email" name="email" id="email" placeholder="Enter your email">
+    <button type="submit">Subscribe</button>
+    <div>
+      questions or feedback?
+      <a href="mailto:support@mindcare.com">support@mindcare.com</a>
+    </div>
+    <a href="https://zenquotes.io/" target="_blank">Get inspired</a>
+    <div id="quote-box">
+      <div id="quote">Loading quote...</div>
+      <div id="author"></div>
+      <button onclick="getQuote()">New Quote</button>
+    </div>
 
-    <div id="chat-window"></div>
-
-    <div class="input-container">
-      <input type="text" id="user-input" placeholder="Tell me how you’re feeling..." autocomplete="off" />
-      <button onclick="handleUserInput()">Send</button>
+    <div>
+      contact us at <a href="mailto:support@mindcare.com">support@mindcare.com</a>
+      follow us on <a href="https://twitter.com/mindcare" target="_blank">Twitter</a> for updates
+      and support.
     </div>
   </div>
   <a href="mindmate.html" target="_blank">Launch MindMate in a new tab</a>

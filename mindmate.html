@@ -7,7 +7,9 @@
     <title>MindMate AI</title>
 
     <link rel="stylesheet" href="style.css" />
-
+    <nav>
+        <a href="index.html">Open MindCare</a>
+    </nav>
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
 </head>
 
@@ -18,8 +20,30 @@
         <div id="chat-window"></div>
 
         <div class="input-container">
-            <input type="text" id="user-input" placeholder="How are you feeling today?" autocomplete="off" />
+            <input type="text" id="user-input" placeholder="How are you feeling today?" autocomplete="on" />
             <button onclick="handleUserInput()">Send</button>
+            <button type="reset">Reset</button>
+            </div>  
+        <div class="input-container">
+            <label for="datetime-input">Select Date and Time:</label>
+            <input type="datetime-local" name="datetime" id="datetime-input" />
+            <button onclick="handleDateTimeInput()">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+        <div class="input-container">
+            <label for="mood-select">How are you feeling?</label>
+            <select id="mood-select" onchange="handleMoodChange()">
+                <option value="">Select mood</option>
+                <option value="happy">Happy</option>
+                <option value="sad">Sad</option>
+                <option value="angry">Angry</option>
+                <option value="anxious">Anxious</option>
+                <option value="excited">Excited</option>
+            </select>
+        </div>
+        <div>
+            click the button above to chat with MindMate, our dedicated chat application for mental health support.
+            You can also access MindMate in a new tab for a more immersive experience from the main page.
         </div>
     </div>
 

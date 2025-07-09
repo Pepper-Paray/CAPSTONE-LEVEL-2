@@ -1,3 +1,4 @@
+
 async function fetchBackgroundImage(query = "calm") {
     const response = await fetch(`https://picsum.photos/seed/${query}/1200/800`);
     document.body.style.backgroundImage = `url('${response.url}')`;
@@ -57,5 +58,14 @@ function getMindMateResponse(userInput) {
         return "I'm listening. What’s alive in you right now?";
     }
 }
+async function fetchZenQuote() {
+    const response = await fetch("https://zenquotes.io/api/random");
+    const data = await response.json();
+    const quote = data[0].q;
+    const author = data[0].a;
+
+    console.log(`"${quote}" — ${author}`);
+}
+fetchZenQuote();
 
 

@@ -1,4 +1,4 @@
-/* Reset and base styles */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,7 +19,6 @@ body {
   text-align: center;
 }
 
-/* Optional calming overlay */
 body::before {
   content: "";
   position: fixed;
@@ -31,11 +30,10 @@ body::before {
   z-index: -1;
 }
 
-/* Chat container */
 #app {
   width: 100%;
   max-width: 520px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(46, 77, 116, 0.711);
   border-radius: 20px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   padding: 24px;
@@ -44,14 +42,12 @@ body::before {
   align-items: center;
 }
 
-/* App title */
 .title {
   font-size: 1.8em;
   color: #3a506b;
   margin-bottom: 12px;
 }
 
-/* Chat bubbles */
 #chat-window {
   width: 100%;
   max-height: 420px;
@@ -73,16 +69,16 @@ body::before {
 }
 
 .user {
-  background-color: #cce5ff;
+  background-color: #26619f;
   align-self: flex-end;
 }
 
 .ai {
-  background-color: #e6ffe6;
+  background-color: #222c77;
   align-self: flex-start;
 }
 
-/* Input and button */
+
 .input-container {
   width: 100%;
   display: flex;
