@@ -58,17 +58,23 @@ function getMindMateResponse(userInput) {
         return "I'm listening. What’s alive in you right now?";
     }
 }
-async function fetchZenQuote() {
-    const response = await fetch("https://zenquotes.io/api/random");
-    const data = await response.json();
-    const quote = data[0].q;
-    const author = data[0].a;
+async function fetchQuote() {
+    try {
+        const response = await fetch("https://zenquotes.io/api/random");
+        const data = await response.json();
+        const quote = data[0];
 
-    console.log(`"${quote}" — ${author}`);
+        document.getElementById("quoteText").textContent = `"${quote.q}"`;
+        document.getElementById("quoteAuthor").textContent = `– ${quote.a}`;
+    } catch (error) {
+        document.getElementById("quoteText").textContent = "Failed to fetch quote.";
+        document.getElementById("quoteAuthor").textContent = "";
+        console.error("Error fetching quote:", error);
+    }
 }
-fetchZenQuote();
-function fetchZenQuotes() {
-    
+
+fetchQuote();
+
 [
     {
         "q": "Inner peace is when you realize that, in the end, nothing matters.",
@@ -371,4 +377,4 @@ function fetchZenQuotes() {
         "h": "<blockquote>&ldquo;To be prepared is half the victory. &rdquo; &mdash; <footer>Miguel de Cervantes</footer></blockquote>"
     }
 ]
-}
+
